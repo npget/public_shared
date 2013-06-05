@@ -1,4 +1,20 @@
 <?php
+
+
+
+    // LA CONNESSIONE 
+function connetti_mysqlpublico(){
+        $my = new mysqli("localhost", "root", "new-password","test");
+return $my ;
+}
+
+
+
+
+
+/*
+
+
 function connetti_mysqlpublico(){
 //error_reporting();
 
@@ -16,9 +32,11 @@ if($ris==null){//se il risultato � sbagliato  non fa nulla   esci
 $esito=mysql_select_db($nomesql,$ris);// selezione del  DB 
 if($esito==false){// se � falso  o errato   lo script  il costrutto per la prima if 
 				echo 'db non selezionatooooooooooo';
-			session_unset();session_destroy();			    exit;				}				return $ris;}
+			session_unset();session_destroy();			    exit;				}			
 
+	return $ris;}
 
+*/
 			
 			
 			function idutente(){
