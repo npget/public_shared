@@ -14,8 +14,8 @@ $_SESSION['1']['news']='default';
 // QUESTA è una prassi che non si dovrebbe adoperare ma intanto c è 
 // sicuramente è un enoooooooooooooorme errore ma .... 
 // LA CONNECTION
-include'utenza/clspubbliche/conn/conn.php';
-include'function/clspubbliche/clsutenza.php';
+include 'utenza/clspubbliche/conn/conn.php';
+include 'function/clspubbliche/clsutenza.php';
 include 'function/he.php'; 
 
 ?>

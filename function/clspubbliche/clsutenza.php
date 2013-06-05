@@ -1,6 +1,6 @@
 <?php
 	
-	
+	//$newris=conn_public();
 	
 	$ris=connetti_mysqlpublico();
 	
@@ -114,12 +114,18 @@
 		//$id=16;
 		$id=idutente();
 		
-		$ris=connetti_mysqlpublico();
+	//	$ris=connetti_mysqlpublico();
+		$newris = conn_public();
+	
 		$sql="SELECT * FROM utenti,webpubblic 
 		where utenti.IDUtente=$id AND  webpubblic.id_exutente=$id   order by IDUtente";
-		$res=mysql_query($sql,$ris);
-		$max= mysql_num_rows($res);
-		while($val=mysql_fetch_assoc($res)){
+	//	$res=mysql_query($sql,$ris);
+		$res= $newris -> query ($sql);
+	
+    
+    
+    	$max= mysqli_num_rows($res);
+		while($val=mysqli_fetch_assoc($res)){
 			
 			$arrayutente=$val;
 		}
