@@ -1,0 +1,79 @@
+RewriteEngine On
+
+
+#TROVATAG ARTICOLI  al product.php?tag=
+RewriteRule    ^([A-Za-z0-9-]+)_.html$  index.php?tag=$1  [L]
+RewriteRule    ^([A-Za-z0-9-]+)_.asp$  index.php?tag=$1  [L]
+RewriteRule    ^([A-Za-z0-9-]+)_.php$  index.php?tag=$1  [L]
+RewriteRule    ^([A-Za-z0-9-]+)_/$  index.php?tag=$1 [L]
+RewriteRule    ^([A-Za-z0-9-]+)_$  index.php?tag=$1 [L]
+
+
+
+
+
+
+
+
+
+
+
+#RewriteRule ^prodotto-([0-9]+)\.html$ index.php?v=$1   QUESTA FA UNA PAGINA 
+#passalaseconda e trova le terze dalle query 
+RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)$    index.php?idcat2=$2&nomecat2=$1  [L]
+
+
+
+RewriteRule    ^([0-9-]+)/([A-Za-z0-9-]+)\.html$    index.php?trovaallcat2=$1&nomecategoria1=$2  [L]
+#RewriteRule    ^([A-Za-z0-9-]+)\.html$   index.php?vedicategegoriamadre=$1&namecat$2  [L]
+#RewriteRule ^([A-Za-z0-9-]+)/([0-9]+)/$ index.php?vedicategegoriamadre=$1&namecat$2  [L]
+#RewriteRule ^([A-Za-z0-9-]+)/([0-9]+)/$ index.php?vedicategegoriamadre=$1&namecat$2  [L]
+
+
+
+
+#RewriteRule    ^([A-Za-z0-9-]+)/desc([0-9-]+)\.html$    index.php?viewpeoductsovertree=$2  [L]
+#trovatutte le terzecategorie
+RewriteRule    ^([A-Za-z0-9-]+)/([0-9-]+)/$    product.php?viewpeoductsovertree=$2  [L]
+
+
+
+#PARAMETRO PASSATO per  PAGE   lista articoli
+RewriteRule    ^([A-Za-z0-9-]+)/([0-9-]+)/page/([0-9-]+)/$    product.php?viewpeoductsovertree=$2&page=$3  [L]
+
+
+
+
+
+
+
+#trovarticolosingolo     #NOME            #3cat          #serialproduct
+RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)\.html$  product.php?serial=$3&cat3=$2  [L]
+
+
+RewriteRule    ^CATALOGO/  product.php?vedicatalogo=vedicatalogo  [L]
+RewriteRule    ^CATALOGO  product.php?vedicatalogo=vedicatalogo [L]
+
+
+#trovarticolodaformautcomplet
+RewriteRule    ^CERCA/([A-Za-z0-9-]+)/$  product.php?cercadanome=$1  [L]
+RewriteRule    ^CERCA/([A-Za-z0-9-]+)$  product.php?cercadanome=$1  [L]
+
+
+RewriteRule    ^HOME/$  index.php  [L]
+RewriteRule    ^HOME$  index.php  [L]
+
+RewriteRule    ^CONTATTI/$  home.php?contatti=contatti  [L]
+RewriteRule    ^CONTATTI$  home.php?contatti=contatti  [L]
+
+#NEWS
+RewriteRule    ^NEWS$  news.php?messaggi=messaggi  [L]
+RewriteRule    ^NEWS/$  news.php?messaggi=messaggi  [L]
+#lettura singolomessaggio
+RewriteRule    ^NEWS/msg([A-Za-z0-9-]+)/([A-Za-z0-9-]+)\.html$  news.php?idmessage=$1  [L]
+RewriteRule    ^NEWS/msg([A-Za-z0-9-]+)/([A-Za-z0-9-]+)\.asp$  news.php?idmessage=$1  [L]
+
+
+
+
+
