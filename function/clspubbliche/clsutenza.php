@@ -100,7 +100,7 @@
 		
 		
 	</style>
-	<form method='GET' action='<?=pathsitoutenza();?>'>
+	<form method='GET' action='<? echo pathsitoutenza();?>'>
 		
 		<input type='text' id='namproduct' name='b' size='30' value='<?=$_GET['namproduct'];?>' style='padding:3px;color:black;overflow:hidden-webkit-border-radius: 5px;
 		border-radius: 5px;' placeholder='TROVA NOME E CODICI' onchange='document.submit();'>
