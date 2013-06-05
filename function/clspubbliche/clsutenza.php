@@ -1,4 +1,6 @@
-<?
+<?php
+	
+	
 	
 	$ris=connetti_mysqlpublico();
 	
@@ -103,7 +105,7 @@
 		<input type='text' id='namproduct' name='b' size='30' value='<?=$_GET['namproduct'];?>' style='padding:3px;color:black;overflow:hidden-webkit-border-radius: 5px;
 		border-radius: 5px;' placeholder='TROVA NOME E CODICI' onchange='document.submit();'>
 	<input type='submit' value='Trova' class='ui-state-active'> </form>
-	<?
+	<?php
 	}
 	
 	

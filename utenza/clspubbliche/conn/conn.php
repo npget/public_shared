@@ -2,17 +2,18 @@
 
 
 
-    // LA CONNESSIONE 
-function connetti_mysqlpublico(){
-        $my = new mysqli("localhost", "root", "new-password","test");
-return $my ;
-}
+    // LA CONNESSIONE
+    
+function conn_simple(){
+        $my = new mysqli("localhost", "root", "new-password","sql333894_1");
+return $ris;}
 
 
 
 
+    
 
-/*
+
 
 
 function connetti_mysqlpublico(){
@@ -36,8 +37,7 @@ if($esito==false){// se � falso  o errato   lo script  il costrutto per la pri
 
 	return $ris;}
 
-*/
-			
+		
 			
 			function idutente(){
 			$nomeutente=$_GET['idutente'];
