@@ -1,12 +1,15 @@
-<?
+<?php
 session_start();
+error_reporting(0);
+
 $_SESSION['1']['index']='default';
 $_SESSION['1']['catalogo']='default';
 $_SESSION['1']['home']='highlight';
 $_SESSION['1']['news']='default';
-include_once'utenza/clspubbliche/conn/conn.php';
-include_once'../0_cls/utenza/clspubbliche/clsutenza.php';
-include'../0_cls/utenza/he.php'; 
+include 'utenza/clspubbliche/conn/conn.php';
+include 'function/clspubbliche/clsutenza.php';
+include 'function/he.php'; 
+
 $array=arrautente();
 $mappatura=unserialize($array['mappaziendale']); 
 ?>
@@ -17,7 +20,7 @@ $(window).load(function(){
 
     function initialize() {
         var map_options = {
-            center: new google.maps.LatLng(<?=$mappatura[0];?>,<?=$mappatura[1];?>),
+            center: new google.maps.LatLng(<?php echo $mappatura[0];?>,<?php echo  $mappatura[1];?>),
             zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -35,9 +38,9 @@ var image ="../favicon.ico";
         var h = [];
 
         t.push('xxxxx');
-        x.push(<?=$mappatura[0];?>);
-        y.push(<?=$mappatura[1];?>);
-        h.push("<p><img src='http://<?=$_SERVER["HTTP_HOST"];?>/favicon.ico' border='0'><strong>xxxxxx</strong><br/><a target='_blank' href='http://www.novaproget.com'>NOVA</a></p>");
+        x.push(<?php echo $mappatura[0];?>);
+        y.push(<?php echo $mappatura[1];?>);
+        h.push("<p><img src='http://<?php echo $_SERVER["HTTP_HOST"];?>/favicon.ico' border='0'><strong>xxxxxx</strong><br/><a target='_blank' href='http://www.novaproget.com'>NOVA</a></p>");
 
 
 		
@@ -72,14 +75,18 @@ initialize();
 });
 </script>
 </head>
-<body > 
- <?
-include'../0_cls/utenza/menuutenza.php';
-include'../0_cls/utenza/social.php';
+
+<body onload='show_clock();'> 
+<?php
+ 
+ 
+include  'function/menuutenza.php';
+// include  'function/social.php';
 ?>
 
 <div id="centralemedio" class='ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix' >
-<? include '../0_cls/utenza/centralemedio.php';?>  
+<?php 
+ include 'function/centralemedio.php';?>  
 </div>
 
 
@@ -98,5 +105,6 @@ include'../0_cls/utenza/social.php';
 
 
 
-<?
+<?php 
+
 include'../0_cls/utenza/footerstile.php';?>

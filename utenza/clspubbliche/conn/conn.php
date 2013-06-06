@@ -40,8 +40,17 @@ if($esito==false){// se � falso  o errato   lo script  il costrutto per la pri
 
 			
 			function idutente(){
-			$nomeutente=$_GET['idutente'];
-			return $nomeutente;}
+			    $namedaget=$_GET['nomeutente'];
+			    $riss=conn_public();
+                $sqlsearchbyname="SELECT IDUtente from utenti where nomeaziendale ='$namedaget' " ;
+                
+                $res= $riss -> query($sqlsearchbyname);
+                
+                    $val=mysqli_fetch_assoc($res);
+			$nomeutente=$val['IDUtente'];
+            
+			return $nomeutente;
+            }
 
 //HO SOSTITUITO NELLA ROOT SHARED CON parsito()
 function root_shared(){
@@ -63,8 +72,11 @@ return "http://".$_SERVER["HTTP_HOST"] .'/novaproget.com/provaseriashare/utenza/
 
 //usato dentro il menu
 function pathsitoutenza(){
+     $namedaget=$_GET['nomeutente'];
+    
+    
 //return "http://".$_SERVER["HTTP_HOST"] .'/novaproget.com/utenza/'; 
-return "http://".$_SERVER["HTTP_HOST"] .'/novaproget.com/provaseriashare/'; 
+return "http://".$_SERVER["HTTP_HOST"] .'/novaproget.com/'.$namedaget.'/'; 
 }
 
 

@@ -88,7 +88,7 @@
 				if($tg==$k){$class="class='ui-state-default' style='margin-left:12px;text-decoration:none;' ";
 					}else{
 					$class="class='' style='margin-left:12px;text-decoration:none;'";}
-				?><a href='<?=pathsitoutenza();?>NEWS/?tg=<?=$k;?>' <?=$class;?>><?=$k;?></a><?
+				?><a href='<?=pathsitoutenza();?>news/?tg=<?=$k;?>' <?=$class;?>><?=$k;?></a><?
 				if(!($int %14)){
 					echo '<br>';
 					
@@ -154,7 +154,7 @@
 				?><tr><td style='padding:10px;margin:20px;width:20%;font-size:10px;'>
 				<?=$data;?><!--<a href='#'><img <?=$figura;?>width='50px' border='0' ></a>--></td>
 				<td VALIGN='MIDDLE'><strong>
-					<?ECHO utf8_encode($tagliato);?><a href='<?=pathsitoutenza();?>NEWS/
+					<?ECHO utf8_encode($tagliato);?><a href='<?=pathsitoutenza();?>news/
 					<?=$idmess;?>.<?echo preg_replace('/[^A-Za-z0-9]/','-',$tagliato);?>.html'>Leggi</a>
 				</strong>
 				</td></tr>

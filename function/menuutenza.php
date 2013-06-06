@@ -8,7 +8,7 @@
 	
 	
 	
-	<div id='logoutenza'style="	background-image:url(<?echo nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_';print_r($array['weblogo']);?>);	">
+<div id='logoutenza' style="	background-image:url(<?php echo nomeserver().'_nova_img/'.idutente().'/imgutenza/_s_';print_r($array['weblogo']);?>);	">
 	</div>
 	
 	
@@ -18,7 +18,7 @@
 		
 		
 		<ul id='menu'  >
-			<li  > <a onclick="location.href='<?=pathsitoutenza();?>HOME/'"
+			<li  > <a onclick="location.href='<?php echo pathsitoutenza();?>home'"
 				class="ui-state-<? echo $_SESSION['1']['index'];?> ui-corner-all">HOME</a>
 				
 			</li>        
@@ -30,10 +30,10 @@
 			-->
 			
 			
-			<li ><a onclick="location.href='<?=pathsitoutenza();?>NEWS/'"
+			<li ><a onclick="location.href='<?=pathsitoutenza();?>news/'"
 				class="ui-state-<?echo $_SESSION['1']['news'];?> ui-corner-all"  >
 			NEWS</a></li>
-			<li><a onclick="location.href='<?=pathsitoutenza();?>CONTATTI/'"
+			<li><a onclick="location.href='<?=pathsitoutenza();?>contact/'"
 				class="ui-state-<?echo $_SESSION['1']['home'];?> ui-corner-all">
 				CONTATTI </a>
 			</li>

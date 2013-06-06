@@ -102,7 +102,7 @@
 	</style>
 	<form method='GET' action='<? echo pathsitoutenza();?>'>
 		
-		<input type='text' id='namproduct' name='b' size='30' value='<?=$_GET['namproduct'];?>' style='padding:3px;color:black;overflow:hidden-webkit-border-radius: 5px;
+		<input type='text' id='namproduct' name='b' size='30' value='<?php echo $_GET['namproduct'];?>' style='padding:3px;color:black;overflow:hidden-webkit-border-radius: 5px;
 		border-radius: 5px;' placeholder='TROVA NOME E CODICI' onchange='document.submit();'>
 	<input type='submit' value='Trova' class='ui-state-active'> </form>
 	<?php
@@ -186,16 +186,24 @@
 	?>
 	<div class='ui-corner-all ui-state-active' id='scorrere' >
 		
-		<a href="<?=pathsitoutenza().$risultati['ID_categoria'].'/'. preg_replace("/[^0-9a-zA-Z]/","-",$risultati['Categoria']);?>.html"><?=$risultati['Categoria'];?> > ></a>
-		<? if ($risultati['descrizionecategoria']!=""){?>
-			<a href="<?=pathsitoutenza().preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descrizionecategoria']).'/'.$risultati['idsottocateg'];?>"><?=$risultati['descrizionecategoria'];?> > ></a>
-			<a href="<?=pathsitoutenza().preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descategtre']).'/'.$risultati['id_categoria_1sub'];?>/"><?=$risultati['descategtre'];?></a>
+		<a href="<?php echo pathsitoutenza().$risultati['ID_categoria'].'/'. preg_replace("/[^0-9a-zA-Z]/","-",$risultati['Categoria']);?>/"><?=$risultati['Categoria'];?> > ></a>
+		<?php
+		
+		
+		 if ($risultati['descrizionecategoria']!=""){
+		     $url_conn=$risultati['ID_categoria'].'/'. preg_replace("/[^0-9a-zA-Z]/","-",$risultati['Categoria'])
+		     
+		     ?>
+			<a href="<?=pathsitoutenza().$url_conn.'/'. preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descrizionecategoria']).'/'.$risultati['idsottocateg'];?>"><?=$risultati['descrizionecategoria'];?> > ></a>
+			<a href="<?=pathsitoutenza().$url_conn.'/'.preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descrizionecategoria']).'/'.preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descategtre']).'/'.$risultati['id_categoria_1sub'];?>/"><?=$risultati['descategtre'];?></a>
 		<?}?>
 		
 	</div>
 	<?
 		
 	}
+
+
 	function querydanome($nome){
 		$ris=connetti_mysqlpublico();
 		//$b=16;
@@ -260,28 +268,59 @@
 					
 				}
 			}
-			
-			if(!$_GET){
+            
+            
+			// meta per utente home
+			if(($_GET['nomeutente']!="")and($_GET['home']=='home')){
 				$title="Welcome -".$array['nomeaziendale'];
 				$desc=$array['infoaziendali'];
 				$tag=$array['tagutente'];
 				$image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
 			}
+            
+            //meta per pagina messaggi
+            if(($_GET['nomeutente']!="")and($_GET['messaggi']=='messaggi')){
+                $title="News by -".$array['nomeaziendale'];
+                $desc=$array['infoaziendali'];
+                $tag=$array['tagutente'];
+                $image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
+            }
+
+            
+            // meta per pagina contatti 
+  if(($_GET['nomeutente']!="")and($_GET['contatti']=='contatti')){
+                $title="Contatta   -".$array['nomeaziendale'];
+                $desc=$array['infoaziendali'];
+                $tag=$array['tagutente'];
+                $image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
+            }
+            
+                // meta per utente tag
+            if(($_GET['nomeutente']!="")and($_GET['tag']!="")){
+                $title="Cerca Parola chiave articoli : ".$_GET['tag']." by  ".$array['nomeaziendale'];
+                $desc=$array['infoaziendali'];
+                $tag=$array['tagutente'];
+                $image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
+            }
+            
+            
+            
+            
 		?>
-		<title><?=$title;?></title>
-		<meta name="title" content="<?=$title;?>">
-		<meta name="keywords" content="<?=$tag;?>">
-		<meta name="description" content="<?=$desc;?>">
-		<link rel="canonical" href="<?=$url;?>">
-		<link rel="image_src" href="<?=$image?>">
+		<title><?php echo  $title;?></title>
+		<meta name="title" content="<?php echo $title;?>">
+		<meta name="keywords" content="<?php echo $tag;?>">
+		<meta name="description" content="<?php echo $desc;?>">
+		<link rel="canonical" href="<?php echo $url;?>">
+		<link rel="image_src" href="<?php echo $image?>">
 		<!-- Facebook opengraph -->
-		<meta property="og:title" content="<?=$title;?>" >
-		<meta property="og:image" content="<?=$image?>" >
-		<meta property="og:description" content="<?=$desc;?>" >
+		<meta property="og:title" content="<?php echo $title;?>" >
+		<meta property="og:image" content="<?php echo $image?>" >
+		<meta property="og:description" content="<?php echo $desc;?>" >
 		<meta property="og:site_name" content="Stilediroma" >
 		<meta property="og:app_id" content="411187172266211" >
 		<meta property="og:type" content="article" >
-		<meta property="og:url" content="<?=$url?>" >
+		<meta property="og:url" content="<?php echo $url?>" >
 		
 		
 		<?
@@ -604,7 +643,8 @@
 													function scorricat2daid($idcat){
 														//$b=16;
 														$b=idutente();
-														?> SOTTO CATEGORIE <?
+														?>II categorie(rg640 clsutenza )
+														<?php
 														$ris=connetti_mysqlpublico();
 														$sql="SELECT  *   FROM  categorie_sub ,categorie where 
 														categorie.idex_rifutente='$b' and 
@@ -625,8 +665,8 @@
 														cursor:pointer;margin:10px;padding:10px;float:left;width:120px;height:120px;' id="anim<?=$id1;?>" class=<?=$colore;?> >
 															<b class=<?$colore;?> ></b>
 															<div id='fotodesc-<?=$id1;?>' class=<?=$colore;?> style='position:absolute;font-size:14px;padding:5px;'> 
-																<a href='<? echo pathsitoutenza().preg_replace("/[^0-9a-zA-Z]/","-",$descrizionecategoria)."/".$idsottocateg;?>'>
-																<?=$descrizionecategoria;?></a>
+																<a href='<? echo preg_replace("/[^0-9a-zA-Z]/","-",$descrizionecategoria)."/".$idsottocateg;?>'>
+																<?=$descrizionecategoria;?>cc</a>
 															</div>
 															
 															
@@ -634,11 +674,11 @@
 															
 														<? echo script($id1);?></div>
 														
-													<?}?>
-													
-													
-													
 													<?}
+													
+													
+													
+													 }
 													
 													
 													
@@ -646,7 +686,7 @@
 													function trovale3categorie($i,$b){
 													?>
 													TERZE CATEGORIE  
-													<?
+													<?php 
 														
 														$ris=connetti_mysqlpublico();
 														
@@ -672,10 +712,10 @@
 														
 														<div style='background-image:url(<?=nomeserver();?>_nova_img/<?=$b;?>/imgcategorie/_s_<?=$urlpathcategoria_1sub;?>);background-repeat:no-repeat;
 														cursor:pointer;margin:10px;padding:10px;float:left;width:120px;height:120px;position:relative;padding:5px;' id="anim<?=$id1;?>" class=<?=$colore;?> >
-															<b class=<?$colore;?> ></b>
-															<div id='fotodesc-<?=$id1;?>'style='position:absolute;font-size:14px;padding:5px;z-index:2;' class=<?=$colore;?>>
+															<b class=<?php echo $colore;?> ></b>
+															<div id='fotodesc-<?php $id1;?>'style='position:absolute;font-size:14px;padding:5px;z-index:2;' class=<?=$colore;?>>
 																
-																<a href='<?echo pathsitoutenza().preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?=$id_categoria_1sub;?>/'><?=$descategtre; ?></a>
+																<a href='<?php echo preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?=$id_categoria_1sub;?>/'><?=$descategtre; ?></a>
 																
 																<span  style='top:0px;'>Articoli
 																<? print_r($risfet[0]); ?></span>
@@ -774,7 +814,7 @@
 																style='
 																opacity:0.9;position:absolute;bottom:0px;padding:5px;min-height:40%;width:90%'  >
 																	
-																	<a href='<?=pathsitoutenza().$ID_categoria.'/'. preg_replace("/[^0-9a-zA-Z]/","-",$Categoria)?>.html'
+																	<a href='<?php pathsitoutenza().$ID_categoria.'/'. preg_replace("/[^0-9a-zA-Z]/","-",$Categoria)?>/'
 																	style='font-size:16px;color:#fffff;padding:10px;'><?=$Categoria;?></a>
 																	
 																	</a>
@@ -807,12 +847,12 @@
 															if($max>=1){	
 																?>
 <div id='sottomenu' class='ui-state-default'  >
-	<ul><?
+	<ul><?php
 															while($val=mysql_fetch_assoc($res)){
 																extract($val);
 																
 																echo "<li class='ui-state-default ui-corner-all' >
-																<a href='".pathsitoutenza().$ID_categoria."/". preg_replace("/[^0-9a-zA-Z]/","-",$Categoria).".html'>"
+																<a href='".pathsitoutenza().$ID_categoria."/". preg_replace("/[^0-9a-zA-Z]/","-",$Categoria)."/'>"
 																.ucfirst(strtolower($Categoria))."</a>
 																";
 																
@@ -828,11 +868,13 @@
 																			extract($valsub);
 																			?><center><div  >
 																				<img src="<?echo $target.'_s_'.$pathimgcategoria ?>" width='150px' align='middle'>
-																				<?
+																				<?php
+																				
+																				$url_connect=$ID_categoria."/". preg_replace("/[^0-9a-zA-Z]/","-",$Categoria).'/'.$descrizionecategoria;
 																					
 																					echo $descrizionecategoria."<hr>";
 																					
-																					appoggiopersopra($valsub['idsottocateg']);
+																					appoggiopersopra($valsub['idsottocateg'],$url_connect);
 																					
 																					
 																					echo "</div></center>";
@@ -869,7 +911,7 @@
 																		}
 																		
 																		
-																		function appoggiopersopra($idsottocateg){
+																		function appoggiopersopra($idsottocateg,$url_connect){
 																			$ris=connetti_mysqlpublico();
 																			$i=idutente();
 																			$target = nomeserver()."_nova_img/".$i."/imgcategorie/";
@@ -881,7 +923,7 @@
 																			extract($rs);?>
 																			
 																			
-																			<a href='<?echo pathsitoutenza().preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?=$id_categoria_1sub;?>/'>
+																			<a href='<?echo pathsitoutenza().$url_connect.'/'.preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?=$id_categoria_1sub;?>/'>
 																			
 																			<img src='<?=$target.'_s_'.$urlpathcategoria_1sub; ?>' width='30px'border='0'>
 																			<? echo ucfirst(strtolower($descategtre)) ; ?>	

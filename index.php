@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-print_r($_REQUEST);
+
 
 $_SESSION['1']['index']='highlight';
 $_SESSION['1']['catalogo']='default';
@@ -23,12 +23,20 @@ include 'function/he.php';
 <body onload='show_clock();'> 
 	
 <?php 
+
+print_r();
+print_r($_REQUEST);
+//this is menu
 include  'function/menuutenza.php';
+
+
+//this is bubble share 
 //include'../0_cls/utenza/social.php';
 ?>
 
 <div id="centralemedio" >
 <?php
+//qui  cè il fulcro delle chiamate 
 include 'function/centralemedio.php';?>  
 </div>
 
