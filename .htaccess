@@ -1,40 +1,88 @@
 RewriteEngine On
 
 
-#TROVATAG ARTICOLI  al product.php?tag=
-RewriteRule    ^([A-Za-z0-9-]+)_.html$  index.php?tag=$1  [L]
-RewriteRule    ^([A-Za-z0-9-]+)_.asp$  index.php?tag=$1  [L]
-RewriteRule    ^([A-Za-z0-9-]+)_.php$  index.php?tag=$1  [L]
-RewriteRule    ^([A-Za-z0-9-]+)_/$  index.php?tag=$1 [L]
-RewriteRule    ^([A-Za-z0-9-]+)_$  index.php?tag=$1 [L]
+
+##PROVA ANONIMA PER LO SHARE DEGLI UTENTI 
+#passo il nome e l id dell utente .... 
+
+
+
+
+#CONFIGURAZIONE ATTIVA per inizio e  home
+ 
+
+  
+ 
+#RewriteRule ^([_A-Za-z0-9-]*)/$                     provaseriashare/index.php?nomeutente=$1&home=home [L]
+#RewriteRule ^([_A-Za-z0-9-]*)$                      provaseriashare/index.php?nomeutente=$1&home=home  [L]
+
+#obsoleto ma attivo 
+RewriteRule ^([_A-Za-z0-9-]*)/home/$                 provaseriashare/index.php?nomeutente=$1&home=home [L]
+RewriteRule ^([_A-Za-z0-9-]*)/home$                  provaseriashare/index.php?nomeutente=$1&home=home   [L]
+RewriteRule ^([_A-Za-z0-9-]*)/HOME/$                 provaseriashare/index.php?nomeutente=$1&home=home [L]
+RewriteRule ^([_A-Za-z0-9-]*)/HOME$                  provaseriashare/index.php?nomeutente=$1&home=home  [L]
+
+#contact
+RewriteRule    ^([_A-Za-z0-9-]*)/contact/$           provaseriashare/home.php?nomeutente=$1&contatti=contatti  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/contact$            provaseriashare/home.php?nomeutente=$1&contatti=contatti  [L]
+
+
+
+#NEWS  
+RewriteRule    ^([_A-Za-z0-9-]*)/news$               provaseriashare/news.php?nomeutente=$1&messaggi=messaggi  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/news/$              provaseriashare/news.php?nomeutente=$1&messaggi=messaggi  [L]
+#lettura singolomessaggio
+RewriteRule    ^([_A-Za-z0-9-]*)/news/([A-Za-z0-9-]+).([A-Za-z0-9-]+)\.html$    provaseriashare/news.php?nomeutente=$1&idmessage=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/news/([A-Za-z0-9-]+).([A-Za-z0-9-]+)\.asp$     provaseriashare/news.php?nomeutente=$1&idmessage=$2  [L]
+
+
+
+
+#SEZIONE SCROLLA DA CATEGORIE 
+
+#TUTTE LE CATEGORIE dentro la prima 
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)$      provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)/$      provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+
+#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.html$      provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.asp$       provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.odm$       provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+
+
+#TUTTE le seconde categorie della prima sotto categoria  
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)$            provaseriashare/index.php?nomeutente=$1&nomecat2=$4&idcat2=$5  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)/$           provaseriashare/index.php?nomeutente=$1&nomecat2=$4&idcat2=$5  [L]
+
+
+
+#trovatutte GLI ARTICOLI Della 3 cat ... 
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)$            provaseriashare/index.php?nomeutente=$1&viewpeoductsovertree=$6  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)/$           provaseriashare/index.php?nomeutente=$1&viewpeoductsovertree=$6 [L]
+
+
+
+#RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)/$          provaseriashare/product.php?nomeutente=$1&viewpeoductsovertree=$3  [L]
+#RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+).([0-9-]+).shtml$      provaseriashare/product.php?nomeutente=$1&viewpeoductsovertree=$3  [L]
 
 
 
 
 
 
+#TAG ARTICOLI A CATALOGO 
+#TROVATAG ARTICOLI  al product.php?tag=  passati per tag .. ma o trovo tutto che è meglio  ? 
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.shtml$    provaseriashare/index.php?nomeutente=$1&tag=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.html$    provaseriashare/index.php?nomeutente=$1&tag=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.asp$     provaseriashare/index.php?nomeutente=$1&tag=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.php$     provaseriashare/index.php?nomeutente=$1&tag=$2 [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_/$        provaseriashare/index.php?nomeutente=$1&tag=$2 [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_$         provaseriashare/index.php?nomeutente=$1&tag=$2 [L]
 
 
 
 
 
-#RewriteRule ^prodotto-([0-9]+)\.html$ index.php?v=$1   QUESTA FA UNA PAGINA 
-#passalaseconda e trova le terze dalle query 
-RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)$    index.php?idcat2=$2&nomecat2=$1  [L]
 
-
-
-RewriteRule    ^([0-9-]+)/([A-Za-z0-9-]+)\.html$    index.php?trovaallcat2=$1&nomecategoria1=$2  [L]
-#RewriteRule    ^([A-Za-z0-9-]+)\.html$   index.php?vedicategegoriamadre=$1&namecat$2  [L]
-#RewriteRule ^([A-Za-z0-9-]+)/([0-9]+)/$ index.php?vedicategegoriamadre=$1&namecat$2  [L]
-#RewriteRule ^([A-Za-z0-9-]+)/([0-9]+)/$ index.php?vedicategegoriamadre=$1&namecat$2  [L]
-
-
-
-
-#RewriteRule    ^([A-Za-z0-9-]+)/desc([0-9-]+)\.html$    index.php?viewpeoductsovertree=$2  [L]
-#trovatutte le terzecategorie
-RewriteRule    ^([A-Za-z0-9-]+)/([0-9-]+)/$    product.php?viewpeoductsovertree=$2  [L]
 
 
 
@@ -46,13 +94,15 @@ RewriteRule    ^([A-Za-z0-9-]+)/([0-9-]+)/page/([0-9-]+)/$    product.php?viewpe
 
 
 
-
+#ARTICOLO SINGOLO 
 #trovarticolosingolo     #NOME            #3cat          #serialproduct
-RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)\.html$  product.php?serial=$3&cat3=$2  [L]
+RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)\.html$  provaseriashare/product.php?nomeutente=$1&serial=$4&cat3=$3  [L]
 
 
-RewriteRule    ^CATALOGO/  product.php?vedicatalogo=vedicatalogo  [L]
-RewriteRule    ^CATALOGO  product.php?vedicatalogo=vedicatalogo [L]
+
+
+#RewriteRule    ^CATALOGO/  product.php?vedicatalogo=vedicatalogo  [L]
+#RewriteRule    ^CATALOGO  product.php?vedicatalogo=vedicatalogo [L]
 
 
 #trovarticolodaformautcomplet
@@ -60,19 +110,13 @@ RewriteRule    ^CERCA/([A-Za-z0-9-]+)/$  product.php?cercadanome=$1  [L]
 RewriteRule    ^CERCA/([A-Za-z0-9-]+)$  product.php?cercadanome=$1  [L]
 
 
-RewriteRule    ^HOME/$  index.php  [L]
-RewriteRule    ^HOME$  index.php  [L]
-
-RewriteRule    ^CONTATTI/$  home.php?contatti=contatti  [L]
-RewriteRule    ^CONTATTI$  home.php?contatti=contatti  [L]
-
-#NEWS
-RewriteRule    ^NEWS$  news.php?messaggi=messaggi  [L]
-RewriteRule    ^NEWS/$  news.php?messaggi=messaggi  [L]
-#lettura singolomessaggio
-RewriteRule    ^NEWS/msg([A-Za-z0-9-]+)/([A-Za-z0-9-]+)\.html$  news.php?idmessage=$1  [L]
-RewriteRule    ^NEWS/msg([A-Za-z0-9-]+)/([A-Za-z0-9-]+)\.asp$  news.php?idmessage=$1  [L]
-
+#RewriteBase    PER SLIDER  album
+#1 id slide 2 idutente 3 titolo 
+RewriteRule ^e([0-9-]+).([0-9-]+).([_A-Za-z0-9-]*)/$   slide/index.php?idslide=$1&idute=$2&title=$3  [L]
+RewriteRule ^e([0-9-]+).([0-9-]+).([_A-Za-z0-9-]*)$   slide/index.php?idslide=$1&idute=$2&title=$3  [L]
+RewriteRule ^e([0-9-]+).([0-9-]+).([_A-Za-z0-9-]*).html$  slide/index.php?title=$2&idslide=$1  [L]
+RewriteRule ^e([0-9-]+).([0-9-]+).([_A-Za-z0-9-]*).php$  slide/index.php?title=$2&idslide=$1  [L]
+RewriteRule ^e([0-9-]+).([0-9-]+).([_A-Za-z0-9-]*).asp$  slide/index.php?title=$2&idslide=$1  [L]
 
 
 
