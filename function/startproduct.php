@@ -1,6 +1,6 @@
-<?PHP
+<?php
 
-// QUI NON RICORDO 
+// QUI NON RICORDO  a cosa serviva questo 
 include 'clspubbliche/clsarticoliperslide.php';
 
 

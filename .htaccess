@@ -81,7 +81,8 @@ RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_$            public_shared/inde
 
 
 
-
+#CERCA ARTCIOLO
+RewriteRule    ^([_A-Za-z0-9-]*)/w/([A-Za-z0-9-]*)$            public_shared/index.php?nomeutente=$1&b=$2 [L]
 
 
 
@@ -100,6 +101,12 @@ RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)\.html$
 
 
 
+
+
+
+
+
+####OBSOLETE E VECCHIE 
 
 #RewriteRule    ^CATALOGO/  product.php?vedicatalogo=vedicatalogo  [L]
 #RewriteRule    ^CATALOGO  product.php?vedicatalogo=vedicatalogo [L]

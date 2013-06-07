@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+error_reporting(E_WARNING);
 
 
 $_SESSION['1']['index']='default';

@@ -4,7 +4,7 @@
 	require ('conn/conn.php');
 	$newris=conn_public();
 	$ris=connetti_mysqlpublico();
-	
+	 echo idutente();
 	function querydtagproduct($nome){
 		$ris=connetti_mysqlpublico();
 		
@@ -109,10 +109,12 @@
 	<button type='submit'   >CERCA </button></form>
 
     <script>
-    
+    // MOOLTO cè da fare ,mmm
     function vediunpo () {
         var b = $("#namproduct");
-    $('#centralemedio').load("<?php echo root_shared(); ?>contr_share.php?b=" + b.val() );
+   
+    $('#centralemedio').before("<div id='starload'> </div>");
+    $('#starload').load("<?php echo root_shared(); ?>contr_share.php?b=" + b.val() );
     
     
     
@@ -134,7 +136,7 @@
 		$newris = conn_public();
 	
 		$sql="SELECT * FROM utenti,webpubblic 
-		where utenti.IDUtente=$id  AND  webpubblic.id_exutente=$id   order by IDUtente";
+		where utenti.IDUtente=$id  AND  webpubblic.id_exutente='$id'   order by IDUtente";
 	//	$res=mysql_query($sql,$ris);
 		$res= $newris -> query ($sql);
 	
@@ -156,27 +158,28 @@
         //$b=16;
        
         $newris = conn_public();
-        $id = idutente();
-        $sql="SELECT * FROM products  where  id_utenteint='$id' and
+        $iden = idutente();
+       
+        $sql="SELECT * FROM products  where  id_utenteint='$iden' and
         products.pubblico='PUBBLICO ON'
         and name LIKE '%$nome%'  order by  serial  desc limit 0, 100";
       
 //         $res=mysql_query($sql,$ris);
+       
             $res= $newris -> query ($sql);
             
             
             
         $max= mysqli_num_rows($res);
-        if(!$max){echo $sql."--".$b.'<h1>ARTICOLI NON PRESENTI </h1>';}else{
-            
-            
-            
-            filtri($_SESSION['risperpagina'],$tot,$pages,$ordine);
+       
+        if(!$max){echo $sql."--".$iden.'<h1>ARTICOLI NON PRESENTI </h1>'; return; }else{
+        filtri($_SESSION['risperpagina'],$tot,$pages,$ordine);
             ?>
             <h2> Articoli Presenti  <strong><?php echo $max;?></strong></h2> 
             <?php 
             stamparisart($res);
-        }}
+        }
+        }
         
     
     

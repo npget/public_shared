@@ -1,4 +1,4 @@
-<?
+<?php
 	
 	
 	$ris=connetti_mysqlpublico();
@@ -28,36 +28,29 @@
 			}
 			?><div class='none'>
 			<TABLE><TR><TD>
-				<h2><?echo utf8_encode($titolonews);?></H2>
+				<h2><?php 
+				echo utf8_encode($titolonews);
+				?></H2>
 				</TD>
-				<TD> tag: <?
+				<TD> tag: 
+				    <?php 
 				$stag=explode(",",$tagmess);
 				foreach($stag as $ki=>$k){
 					echo $k;
 					}
 					?> <span style='position:absolute;font-size:13px;'>
-				Scritto il <?=$data;?> </span>
+				Scritto il <?php echo $data;?> </span>
 					</TD></TR></table>
 					<table>
 					<TR><TD style='padding-left: 3%;width: 96%;'>
-					<?
+					<?php 
 					echo htmlspecialchars_decode($testo);?></TD><TD></TD></TR></TABLE>
 					
-					</div><?
+					</div><?php
 		}
 	}
 	
-	function formricercamesg(){
-	?>
-	<form method='POST' >
-		
-		
-	</form>
-	
-	
-	<?
-		
-	}
+
 	
 	
 	function trovatags(){
@@ -107,7 +100,7 @@
 	
 	
 	function scorrimessaggi(){
-		//STAMPO I TAG 
+		//STAMPO I TAG quello che ne rimane 
 		
 		trovatags();
 		
@@ -131,7 +124,8 @@
 		
 		
 		$r=mysql_query($s);
-		?><div style='width:100%;margin-bottom:300px; background-color:#fff;' ><table ><?
+		?><div style='width:100%;margin-bottom:300px; background-color:#fff;' ><table >
+		    <?php
 			while($st=mysql_fetch_assoc($r)){
 				if($i%2==1)$color="ui-state-highlight"; //primo colore
 				else $color="ui-state-default"; //secondo colore
