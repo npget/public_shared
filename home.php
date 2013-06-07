@@ -89,25 +89,15 @@ include  'function/menu_share.php';
 
 <div id="centralemedio" class='ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix' >
 <?php 
- include 'function/central_share.php';?>  
+
+ include 'function/central_share.php';
+ ?>  
 </div>
 
-
+<!--GOOGLE MAPS-->
 <div id='pano'>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 <?php 
 
-include'../0_cls/utenza/footer_share.php';?>
+include'function/footer_share.php';?>

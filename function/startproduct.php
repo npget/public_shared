@@ -1,5 +1,6 @@
-<?
+<?PHP
 
+// QUI NON RICORDO 
 include 'clspubbliche/clsarticoliperslide.php';
 
 
@@ -10,7 +11,7 @@ $e=$_GET['serial'];
 tabellaarticoli33($e);
 }
 
-	?><script type="text/javascript" src="<?=pathsito();?>ui/jquery-1.8.3.js"></script>
+	?><script type="text/javascript" src="<?PHP echo pathsito();?>ui/jquery-1.8.3.js"></script>
  <style> #contenuto{ width:100%; height:100%; margin:15px;} .testo{ margin:20px; width:90%;} 
 #torna{ float:right; width:50%; height:120px; font-size:24px; margin-top:30px; } 
 .titolo_box{ margin-left:20px;} .testo-box{ margin:15px;} .apri{ font-size:18px; font-family:Verdana, Geneva, sans-serif; float:right; margin-right:50px;} 
@@ -31,7 +32,7 @@ $(document).ready(function() {
 <div id="box">
 <h3>CREA Nuova Directory</h3>
 
-<?
+<?PHP
 if($_GET['serial']){
 $e=$_GET['serial'];
 
@@ -54,7 +55,7 @@ jQuery(document).ready(function($) {
 $('div.navigation').css({'width' : '99%', 'float' : 'left'}); 
 $('div.content').css('display', 'block'); var onMouseOutOpacity = 0.67; 
 $('#thumbs ul.thumbs li').opacityrollover({ mouseOutOpacity: onMouseOutOpacity, mouseOverOpacity: 1.0, fadeSpeed: 'fast', exemptionSelector: '.selected' }); 
-var gallery = $('#thumbs').galleriffic({ delay: 2500, numThumbs: 17, preloadAhead: 10, enableTopPager: true, enableBottomPager: false, maxPagesToShow: 7, imageContainerSel: '#slideshow', controlsContainerSel: '#controls', captionContainerSel: '#caption', loadingContainerSel: '#loading', renderSSControls: true, renderNavControls: true, playLinkText: 'Play Slideshow', pauseLinkText: 'Pause Slideshow', prevLinkText: '‹ Previous Photo', nextLinkText: 'Next Photo ›', nextPageLinkText: 'Next ›', prevPageLinkText: '‹ Prev', enableHistory: false, autoStart: false, syncTransitions: true, defaultTransitionDuration: 900, onSlideChange: function(prevIndex, nextIndex) { this.find('ul.thumbs').children() .eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end() .eq(nextIndex).fadeTo('fast', 1.0); }, 
+var gallery = $('#thumbs').galleriffic({ delay: 2500, numThumbs: 17, preloadAhead: 10, enableTopPager: true, enableBottomPager: false, maxPagesToShow: 7, imageContainerSel: '#slideshow', controlsContainerSel: '#controls', captionContainerSel: '#caption', loadingContainerSel: '#loading', renderSSControls: true, renderNavControls: true, playLinkText: 'Play Slideshow', pauseLinkText: 'Pause Slideshow', prevLinkText: 'ï¿½ Previous Photo', nextLinkText: 'Next Photo ï¿½', nextPageLinkText: 'Next ï¿½', prevPageLinkText: 'ï¿½ Prev', enableHistory: false, autoStart: false, syncTransitions: true, defaultTransitionDuration: 900, onSlideChange: function(prevIndex, nextIndex) { this.find('ul.thumbs').children() .eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end() .eq(nextIndex).fadeTo('fast', 1.0); }, 
 onPageTransitionOut: function(callback) { this.fadeTo('fast', 0.0, callback); }, onPageTransitionIn: function() { this.fadeTo('fast', 1.0); } }); }); 
 		</script>
 		-->
@@ -123,12 +124,12 @@ onPageTransitionOut: function(callback) { this.fadeTo('fast', 0.0, callback); },
   js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1&appId=411187172266211";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-comments"  data-href="<?='http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];?>" data-width="470" data-num-posts="2"></div>
+<div class="fb-comments"  data-href="<?PHP echo 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];?>" data-width="470" data-num-posts="2"></div>
 </td></table></div>
 		
 		</body>
 		</html>
-		<?
+		<?PHP
 		
 		?>
 		

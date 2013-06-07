@@ -1,4 +1,4 @@
-<?
+<?PHP
 
 //include_once ('conn.php');
 
@@ -28,7 +28,7 @@ $mappatura=unserialize($mappaziendale);
 <div id='noi' style='height:auto'>
 
 <div style='float:left;'>
-<? echo nl2br(stripslashes($infoaziendali));?></div>
+<?PHP echo nl2br(stripslashes($infoaziendali));?></div>
 
  <div style='margin:10px;padding10px;'>
 
@@ -58,17 +58,22 @@ border-radius: 5px;' rows='7'cols='40' ></textarea>
 
 
 </form>
-<script>
-</script>
+<script></script>
 <pre>
-<?
+<?PHP
 print_r($_POST);
 ?></pre>
 
-<?
-echo $nomeaziendale;echo $sitoaziendale;
-echo $orarioaziendale;echo $comuneaziendale;echo $cap;echo $indirizzoaziendale;
-echo $faxaziendale;echo $telaziendale;echo $emailaziendalepubblica;
+<?PHP
+    echo $nomeaziendale;
+    echo $sitoaziendale;
+    echo $orarioaziendale;
+    echo $comuneaziendale;
+    echo $cap;
+    echo $indirizzoaziendale;
+    echo $faxaziendale;
+    echo $telaziendale;
+    echo $emailaziendalepubblica;
 ?>
 
 
@@ -81,18 +86,9 @@ echo $faxaziendale;echo $telaziendale;echo $emailaziendalepubblica;
 
 
 
- <?
+ <?PHP
 
-}
+    }
 
-
-}
-
-
-
-
-
-
-
-
+    }
 ?>

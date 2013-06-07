@@ -21,7 +21,7 @@
 			
 			
 			filtri($_SESSION['risperpagina'],$tot,$pages,$ordine);
-			?><h2> Articoli Presenti  <strong><?=$max;?></strong></h2> <?
+			?><h2> Articoli Presenti  <strong><?PHP echo $max;?></strong></h2> <?php
 			
 			stamparisart($res);
 		}
@@ -32,7 +32,8 @@
 	
 	function formricerca(){
 		
-	?>		<script src="<?=root_shared();?>jquery.autocomplete.js"/></script>
+	?>		
+	<script src="<?php echo root_shared();?>jquery.autocomplete.js"/></script>
 	<script type="text/javascript" >
 		$(document).ready(function() {
 			$("#namproduct").autocomplete("<?php echo root_shared(); ?>clspubbliche/completproduct.php", {
@@ -151,22 +152,29 @@
     
     
         function querydanome($nome){
-        $ris=connetti_mysqlpublico();
+      //  $ris=connetti_mysqlpublico();
         //$b=16;
-        $b = idutente();
-        
-        $sql="SELECT * FROM products  where  id_utenteint='$b' and
+       
+        $newris = conn_public();
+        $id = idutente();
+        $sql="SELECT * FROM products  where  id_utenteint='$id' and
         products.pubblico='PUBBLICO ON'
         and name LIKE '%$nome%'  order by  serial  desc limit 0, 100";
       
-         $res=mysql_query($sql,$ris);
-        $max= mysql_num_rows($res);
+//         $res=mysql_query($sql,$ris);
+            $res= $newris -> query ($sql);
+            
+            
+            
+        $max= mysqli_num_rows($res);
         if(!$max){echo $sql."--".$b.'<h1>ARTICOLI NON PRESENTI </h1>';}else{
             
             
             
             filtri($_SESSION['risperpagina'],$tot,$pages,$ordine);
-            ?><h2> Articoli Presenti  <strong><?=$max;?></strong></h2> <?
+            ?>
+            <h2> Articoli Presenti  <strong><?php echo $max;?></strong></h2> 
+            <?php 
             stamparisart($res);
         }}
         
@@ -180,190 +188,43 @@
     
 	function script($id1){
 		?>    <script>
-		$("#fotodesc-<?=$id1;?>").hide();
-		$("#anim<?=$id1;?>").animate({'opacity':'0.4'});
-		$("#anim<?=$id1;?>").hover(function(){  
-			//$("#anim<?=$id1;?> b").click(function(){  
+		$("#fotodesc-<?php echo $id1;?>").hide();
+		$("#anim<?php echo $id1;?>").animate({'opacity':'0.4'});
+		$("#anim<?php echo $id1;?>").hover(function(){  
+			//$("#anim<?php echo$id1;?> b").click(function(){  
 			
-			$("#anim<?=$id1;?>").stop().animate({'opacity':'1.0'});
-			//$("#anim<?=$id1;?>").stop().animate({'opacity':'1.0',top:'-10'});
-			$("#fotodesc-<?=$id1;?>").show('slow');
+			$("#anim<?php echo $id1;?>").stop().animate({'opacity':'1.0'});
+			//$("#anim<?php echo $id1;?>").stop().animate({'opacity':'1.0',top:'-10'});
+			$("#fotodesc-<?php echo $id1;?>").show('slow');
 			//    $(this).animate({top:'10'}, 300 );  
 		});  
-		//$("#anim<?=$id1?>").mouseleave(function(){  
-		$("#anim<?=$id1;?>").mouseleave(function(){  
+		//$("#anim<?php echo$id1?>").mouseleave(function(){  
+		$("#anim<?php echo$id1;?>").mouseleave(function(){  
 			
 			
 			//  $(this).animate({top: '0'}, 300 );  
-			//$("#fotodesc-<?=$id1;?>").hide();
+			//$("#fotodesc-<?php echo$id1;?>").hide();
 			
 			$(this).stop().animate({'opacity':'0.5',top:'0'},300);
-			//  $("#fotodesc-<?=$id1;?>").animate({'opacity':'0.0'});
-			$("#fotodesc-<?=$id1;?>").hide('slow');
+			//  $("#fotodesc-<?php echo$id1;?>").animate({'opacity':'0.0'});
+			$("#fotodesc-<?php echo$id1;?>").hide('slow');
 		}); 
-		</script> <?php
-		
-	}
-    
-    
-    
-    
-    
-    
-	
-	function scorripercategorie($id1,$id2,$id3){
-		$ris=connetti_mysqlpublico();
-		//$b=16;
-		$b=idutente();
-		if($id1!=""){
-			$sqlcat="SELECT * from categorie where 
-			categorie.ID_categoria='$id1'  and 
-			categorie.idex_rifutente='$b' ";
-		}
-		if($id2!=""){
-			$sqlcat="SELECT * from categorie, categorie_sub where
-			categorie_sub.idsottocateg='$id2' and 
-			categorie.ID_categoria=categorie_sub.categoria_id and 
-			categorie.idex_rifutente='$b' ";
-		}
-		
-		if($id3!=""){
-			$sqlcat="SELECT * from categorie, categorie_sub,categorie_1sub where
-			categorie_1sub.id_categoria_1sub='$id3' and 
-			categorie_1sub.excategoria=categorie.ID_categoria and 
-			categorie_1sub.ex_categoriasub=categorie_sub.idsottocateg  and
-		categorie.idex_rifutente='$b'";}
-		$riscat=mysql_query($sqlcat);
-		$risultati=mysql_fetch_assoc($riscat);
-	?>
-	<div class='ui-corner-all ui-state-active' id='scorrere' >
-		
-		<a href="<?php echo pathsitoutenza().$risultati['ID_categoria'].'/'. preg_replace("/[^0-9a-zA-Z]/","-",$risultati['Categoria']);?>/"><?=$risultati['Categoria'];?> > ></a>
+		</script> 
 		<?php
 		
-		
-		 if ($risultati['descrizionecategoria']!=""){
-		     $url_conn=$risultati['ID_categoria'].'/'. preg_replace("/[^0-9a-zA-Z]/","-",$risultati['Categoria'])
-		     
-		     ?>
-			<a href="<?=pathsitoutenza().$url_conn.'/'. preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descrizionecategoria']).'/'.$risultati['idsottocateg'];?>"><?=$risultati['descrizionecategoria'];?> > ></a>
-			<a href="<?=pathsitoutenza().$url_conn.'/'.preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descrizionecategoria']).'/'.preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descategtre']).'/'.$risultati['id_categoria_1sub'];?>/"><?=$risultati['descategtre'];?></a>
-		<?php 
-         } 
-         ?>
-		
-	</div>
-	<?php
-		
 	}
+    
+    
+    
+    
+    
+    
 
 
 
-		
-		
-		
-		function metahome(){
-			$array=arrautente(); 
-			$url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];
-			
-			
-			
-			if($_GET['idmessage']!=""){
-				$idms=$_GET['idmessage']."==";
-				$ris=connetti_mysqlpublico();
-				$id=idutente();
-				$idmss= base64_decode($idms);
-				$s="SELECT * from messaggiutentinova where id_utemess='$id' 
-				and pubblico = 'pubblicosi' and idmess ='$idmss'  ; ";
-				$r=mysql_query($s);
-				$image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
-				while($st=mysql_fetch_assoc($r)){
-					
-					extract($st);
-					$title=utf8_encode($titolonews);
-					$desc=substr(eregi_replace(" \n\r","",strip_tags(htmlspecialchars_decode($testo))),0,200);
-					$tag=$data.$desc;
-					
-				}
-			}
-			
-			
-			
-			if($_GET['serial']!=""){
-				$serial=$_GET['serial'];
-				$idut=idutente();
-				$sqltagge="SELECT * from tagproducts where id_exproduct='$serial' and id_exutentetag='$idut' ";
-				$ristagge=mysql_query($sqltagge);
-				while($tagextra=mysql_fetch_assoc($ristagge)){
-					extract($tagextra);
-					$title=$titolo;
-					$desc=$description;
-					$tag=$keywords;
-					$image=$urlimgtag;
-					
-					
-				}
-			}
-            
-            
-			// meta per utente home
-			if(($_GET['nomeutente']!="")and($_GET['home']=='home')){
-				$title="Welcome -".$array['nomeaziendale'];
-				$desc=$array['infoaziendali'];
-				$tag=$array['tagutente'];
-				$image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
-			}
-            
-            //meta per pagina messaggi
-            if(($_GET['nomeutente']!="")and($_GET['messaggi']=='messaggi')){
-                $title="News by -".$array['nomeaziendale'];
-                $desc=$array['infoaziendali'];
-                $tag=$array['tagutente'];
-                $image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
-            }
 
-            
-            // meta per pagina contatti 
-  if(($_GET['nomeutente']!="")and($_GET['contatti']=='contatti')){
-                $title="Contatta   -".$array['nomeaziendale'];
-                $desc=$array['infoaziendali'];
-                $tag=$array['tagutente'];
-                $image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
-            }
-            
-                // meta per utente tag
-            if(($_GET['nomeutente']!="")and($_GET['tag']!="")){
-                $title="Cerca Parola chiave articoli : ".$_GET['tag']." by  ".$array['nomeaziendale'];
-                $desc=$array['infoaziendali'];
-                $tag=$array['tagutente'];
-                $image=nomeserver().'_nova_img/'.idutente().'/imgutenza/_s1_'.$array['weblogo'];
-            }
-            
-            
-            
-            
-		?>
-		<title><?php echo  $title;?></title>
-		<meta name="title" content="<?php echo $title;?>">
-		<meta name="keywords" content="<?php echo $tag;?>">
-		<meta name="description" content="<?php echo $desc;?>">
-		<link rel="canonical" href="<?php echo $url;?>">
-		<link rel="image_src" href="<?php echo $image?>">
-		<!-- Facebook opengraph -->
-		<meta property="og:title" content="<?php echo $title;?>" >
-		<meta property="og:image" content="<?php echo $image?>" >
-		<meta property="og:description" content="<?php echo $desc;?>" >
-		<meta property="og:site_name" content="Stilediroma" >
-		<meta property="og:app_id" content="411187172266211" >
-		<meta property="og:type" content="article" >
-		<meta property="og:url" content="<?php echo $url?>" >
 		
 		
-		<?
-			
-			
-			
-		} 
 		
 		
 		function trovalistarticoli($id){
@@ -419,7 +280,7 @@
 						
 						$sql.=" limit $desclimit, $_SESSION[risperpagina] ";
 					}}
-					scorripercategorie(null,null,$_GET['viewpeoductsovertree']);
+				
 					filtri($_SESSION['risperpagina'],$tot,$pages,$ordine);
 					
 					//print_r($_POST);
@@ -455,9 +316,9 @@
 			?>
 			<form method='POST' action='' name='formfiltri'>
 				
-				TOTALI - [<?=$tot;?>]--Ordine Per 
+				TOTALI - [<?PHP echo $tot;?>]--Ordine Per 
 				<select name='ordine' onchange='document.formfiltri.submit();'>
-					<option value='<?=$_POST['ordine'];?>'><?=$_POST['ordine'];?>
+					<option value='<?PHP echo $_POST['ordine'];?>'><?PHP echo $_POST['ordine'];?>
 						<option value='recente max'>recente max
 							<option value='recente min'>recente min
 								<option value='Prezzo MAx'>Prezzo MAx
@@ -467,18 +328,18 @@
 									<select name='num' onchange='document.formfiltri.submit();'>
 										
 										
-										<option value='<?=$num;?>'><?=$num;?>
+										<option value='<?PHP echo $num;?>'><?PHP echo $num;?>
 											<option value='5'>5
 												<option value='10'>10
 													<option value='20'>20
 														<option value='30'>30</select>
 														
 														<button type='submit' name='lista' value='lista' class='ui-state-active'>
-															<img src='<?=root_shared();?>img/per_page.gif' border='0'>
+															<img src='<?PHP echo root_shared();?>img/per_page.gif' border='0'>
 														</button>
 														<button type='submit' name='griglia' value='griglia'><img src='' border='0'></button>
 														
-														<div class='tabpagine' style='position:relative;float:right;left:-5%'>Pagine.<?
+														<div class='tabpagine' style='position:relative;float:right;left:-5%'>Pagine.<?php
 															for($i=0; $i < $p ; $i++){
 																
 																//url per impaginazione
@@ -486,7 +347,7 @@
 																	?><script>
 																	$(".tabpagine a :first").addClass("ui-state-active");
 																</script>
-																<?
+																<?php
 																	
 																	
 																$url="page/";}
@@ -509,7 +370,7 @@
 																
 																
 															?>
-														<a href='<?=$url.($i+1);?>/'class='<?=$active;?>' style='padding-left:4px;text-decoration:none;padding:4px;' ><?=$i+1;?></a><?}?>
+														<a href='<?PHP echo $url.($i+1);?>/'class='<?PHP echo $active;?>' style='padding-left:4px;text-decoration:none;padding:4px;' ><?PHP echo $i+1;?></a><?php } ?>
 														</div>
 														<script>
 															//$(".tabpagine a :first").addClass("ui-state-active");
@@ -520,18 +381,18 @@
 														
 														
 													</form>
-													<?
+													<?php
 													}
 													
 													
 													//STAMPA LISTA
 													function stamparisartlista($res){
-														$ris=connetti_mysqlpublico();
+														//$ris=connetti_mysqlpublico();
 													?>
 													<table class='ui-corner-all' width='90%' >
 														<?php
 															
-															while($val=mysql_fetch_array($res)){
+															while($val=mysqli_fetch_array($res)){
 																$id1++;
 																//if($id1%2==1)$col="'ui-state-active ui-corner-all'"; //primo colore
 																//else $col="'ui-state-default ui-corner-all'"; //secondo colore
@@ -541,34 +402,34 @@
 																$rese=mysql_query($sqlimg,$ris);
 																$maxe= mysql_num_rows($rese);
 																
-																while($vale=mysql_fetch_array($rese)){
+																while($vale=mysqli_fetch_array($rese)){
 																	extract($vale);
 																	//ECHO imgpublic($idutentepath);
 																?>
 																
 																<tr  class='ui-corner-all'  >
 																	<td>
-																		<a href='<?=pathsitoutenza().eregi_replace(" ","-",$name).'/'.$terzacateforia_ed.'/'.$serial;?>.html'>
+																		<a href='<?php echo pathsitoutenza().eregi_replace(" ","-",$name).'/'.$terzacateforia_ed.'/'.$serial;?>.html'>
 																		
-																		<? echo substr_replace($name,'<br>',21 ,0 );?></a>
+																		<?php echo substr_replace($name,'<br>',21 ,0 );?></a>
 																		
 																		</td><td>
-																		<?=$price;?> 
-																		<?=$serial;?> 
+																		<?PHP echo $price;?> 
+																		<?PHP echo $serial;?> 
 																	</td>
 																	<td>
 																		
-																		<img src='<? echo imgpublic($idutentepath).'thumb/'.$pathimg;?>'
+																		<img src='<?php echo imgpublic($idutentepath).'thumb/'.$pathimg;?>'
 																		class='ui-corner-all' style='max-width:200px;max-height:200px'>
 																		</td><td>
 																		
 																		
 																		
 																		
-																		<img src='<?=root_shared();?>img/apibtnr02.gif'border='0'>
+																		<img src='<?php echo root_shared();?>img/apibtnr02.gif'border='0'>
 																		
 																	</td></tr>
-																	<? 
+																	<?php 
 																		
 																		
 																		
@@ -576,9 +437,9 @@
 																	
 																	
 																	
-																	<?
+																	<?php
 																		
-																	}?></table><?
+																	}?></table><?php
 																	
 													}
 													
@@ -590,7 +451,7 @@
 													function stamparisart($res){
 														$ris=connetti_mysqlpublico();
 													?>
-													<div id ='prodotto'class='ui-stae-active ui-corner-all' style='position:relative;margin-left:10px;margin-bottom:250px;float:left' ><ul><?
+													<div id ='prodotto'class='ui-stae-active ui-corner-all' style='position:relative;margin-left:10px;margin-bottom:250px;float:left' ><ul><?php
 														
 														while($val=mysql_fetch_array($res)){
 															$id1++;
@@ -608,55 +469,55 @@
 															?>
 															
 															<li  style='background-color:#fff;list-style:none;height:250px;box-shadow:3px  3px 1px #757575;
-															float:left;width:200px;margin:20px;padding:9px;position:relative;' id="animp<?=$id1;?>" class='ui-corner-all'  >
+															float:left;width:200px;margin:20px;padding:9px;position:relative;' id="animp<?PHP echo $id1;?>" class='ui-corner-all'  >
 																<span  style='border-TOP-left-radius: 15px;
 																height:80px;font-size:13px;position:absolute;right:0px;bottom:0px;padding:20px;border:0;' 
 																class='ui-state-active'  >  
-																	<a href='<?=pathsitoutenza().eregi_replace(" ","-",$name).'/'.$terzacateforia_ed.'/'.$serial;?>.html'>
+																	<a href='<?PHP echo pathsitoutenza().eregi_replace(" ","-",$name).'/'.$terzacateforia_ed.'/'.$serial;?>.html'>
 																	
-																	<? echo substr_replace($name,'<br>',21 ,0 );?></a><br>
-																	<?=$price;?> <br>
-																	<?=$serial;?> <br>
+																	<?php echo substr_replace($name,'<br>',21 ,0 );?></a><br>
+																	<?php echo $price;?> <br>
+																	<?php echo $serial;?> <br>
 																	
 																</span>
 																
-																<img src='<? echo imgpublic($idutentepath).'thumb/'.$pathimg;?>'
+																<img src='<?php echo imgpublic($idutentepath).'thumb/'.$pathimg;?>'
 																class='ui-corner-all' style='max-width:200px;max-height:200px'>
 																
 																
 																
 																
 																
-																<span id='fotodescp-<?=$id1;?>' 
+																<span id='fotodescp-<?PHP echo $id1;?>' 
 																style='position:absolute;top:0px;right:0px;height:50px;'> 
-																	<img src='<?=root_shared();?>img/apibtnr02.gif'border='0'>
+																	<img src='<?PHP echo root_shared();?>img/apibtnr02.gif'border='0'>
 																</span>
 															</li>
 															<script>
-																$("#fotodescp-<?=$id1;?>").hide();
+																$("#fotodescp-<?PHP echo $id1;?>").hide();
 																
-																$("#animp<?=$id1;?>").hover(function(){  
-																	//$("#anim<?=$id1;?> b").click(function(){  
+																$("#animp<?PHP echo $id1;?>").hover(function(){  
+																	//$("#anim<?PHP echo $id1;?> b").click(function(){  
 																	
 																	
-																	//$("#anim<?=$id1;?>").stop()
-																	$("#fotodescp-<?=$id1;?>").show('slow').animate({'opacity':'1.0',top:'-10'});
+																	//$("#anim<?PHP echo $id1;?>").stop()
+																	$("#fotodescp-<?PHP echo $id1;?>").show('slow').animate({'opacity':'1.0',top:'-10'});
 																	
 																	//    $(this).animate({top:'10'}, 300 );  
 																});  
-																//$("#anim<?=$id1?>").mouseleave(function(){  
-																$("#animp<?=$id1;?>").mouseleave(function(){  
+																//$("#anim<?PHP echo $id1?>").mouseleave(function(){  
+																$("#animp<?PHP echo $id1;?>").mouseleave(function(){  
 																	
 																	
 																	//  $(this).animate({top: '0'}, 300 );  
-																	//$("#fotodesc-<?=$id1;?>").hide();
+																	//$("#fotodesc-<?PHP echo $id1;?>").hide();
 																	
 																	// $(this).stop().animate({'opacity':'1.5',top:'0'},300);
-																	//  $("#fotodesc-<?=$id1;?>").animate({'opacity':'0.0'});
-																	$("#fotodescp-<?=$id1;?>").hide('slow');
+																	//  $("#fotodesc-<?PHP echo $id1;?>").animate({'opacity':'0.0'});
+																	$("#fotodescp-<?PHP echo $id1;?>").hide('slow');
 																}); 
 															</script>
-															<? 
+															<?php 
 																
 																
 																
@@ -664,9 +525,9 @@
 															
 															
 															
-															<?
+															<?php
 																
-															}?></ul></div><?
+															}?></ul></div><?php
 															
 													}
 													
@@ -697,20 +558,20 @@
 															extract($val);
 														?>
 														
-														<div style='background-image:url(<?=nomeserver();?>_nova_img/<?=$b;?>/imgcategorie/_s_<?=$pathimgcategoria;?>);background-repeat:no-repeat;
-														cursor:pointer;margin:10px;padding:10px;float:left;width:120px;height:120px;' id="anim<?=$id1;?>" class=<?=$colore;?> >
-															<b class=<?$colore;?> ></b>
-															<div id='fotodesc-<?=$id1;?>' class=<?=$colore;?> style='position:absolute;font-size:14px;padding:5px;'> 
-																<a href='<? echo preg_replace("/[^0-9a-zA-Z]/","-",$descrizionecategoria)."/".$idsottocateg;?>'>
-																<?=$descrizionecategoria;?>cc</a>
+														<div style='background-image:url(<?PHP echo nomeserver();?>_nova_img/<?PHP echo $b;?>/imgcategorie/_s_<?PHP echo $pathimgcategoria;?>);background-repeat:no-repeat;
+														cursor:pointer;margin:10px;padding:10px;float:left;width:120px;height:120px;' id="anim<?PHP echo $id1;?>" class=<?PHP echo $colore;?> >
+															<b class=<?php echo $colore;?> ></b>
+															<div id='fotodesc-<?PHP echo $id1;?>' class=<?PHP echo $colore;?> style='position:absolute;font-size:14px;padding:5px;'> 
+																<a href='<?php echo preg_replace("/[^0-9a-zA-Z]/","-",$descrizionecategoria)."/".$idsottocateg;?>'>
+																<?PHP echo $descrizionecategoria;?>cc</a>
 															</div>
 															
 															
 															
 															
-														<? echo script($id1);?></div>
+														<?php echo script($id1);?></div>
 														
-													<?}
+													<?php }
 													
 													
 													
@@ -746,21 +607,20 @@
 														?>
 														
 														
-														<div style='background-image:url(<?=nomeserver();?>_nova_img/<?=$b;?>/imgcategorie/_s_<?=$urlpathcategoria_1sub;?>);background-repeat:no-repeat;
-														cursor:pointer;margin:10px;padding:10px;float:left;width:120px;height:120px;position:relative;padding:5px;' id="anim<?=$id1;?>" class=<?=$colore;?> >
+														<div style='background-image:url(<?PHP echo nomeserver();?>_nova_img/<?PHP echo $b;?>/imgcategorie/_s_<?PHP echo $urlpathcategoria_1sub;?>);background-repeat:no-repeat;
+														cursor:pointer;margin:10px;padding:10px;float:left;width:120px;height:120px;position:relative;padding:5px;' id="anim<?PHP echo $id1;?>" class=<?PHP echo $colore;?> >
 															<b class=<?php echo $colore;?> ></b>
-															<div id='fotodesc-<?php $id1;?>'style='position:absolute;font-size:14px;padding:5px;z-index:2;' class=<?=$colore;?>>
+															<div id='fotodesc-<?php $id1;?>'style='position:absolute;font-size:14px;padding:5px;z-index:2;' class=<?PHP echo $colore;?>>
 																
-																<a href='<?php echo preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?=$id_categoria_1sub;?>/'><?=$descategtre; ?></a>
+																<a href='<?php echo preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?PHP echo $id_categoria_1sub;?>/'><?PHP echo $descategtre; ?></a>
 																
 																<span  style='top:0px;'>Articoli
-																<? print_r($risfet[0]); ?></span>
+																<?php print_r($risfet[0]); ?></span>
 															</div>	
 															
 															
-															
-														<? //echo script($id1);?> </div>
-													<?}}
+												</div>
+													<?php } }
 													
 													
 													
@@ -768,7 +628,7 @@
 														$i=idutente();
 														
 													?>CATALOGO
-													<div id="accordion"  style='float:right;width:100%; font-size:14px;' ><?
+													<div id="accordion"  style='float:right;width:100%; font-size:14px;' ><?php
 														$ris=connetti_mysqlpublico();
 														
 														$sql="SELECT  *   FROM  categorie   where idex_rifutente='$i' ";
@@ -779,10 +639,10 @@
 															
 															
 															extract($val);
-														?><h3><a href="#<?=$Categoria;?>"><?=$Categoria;?></a></h3>
+														?><h3><a href="#<?PHP echo $Categoria;?>"><?PHP echo $Categoria;?></a></h3>
 														<div>
 															
-															<?
+															<?php
 																$sqlsubcat=" SELECT * from categorie_sub where categoria_id ='$ID_categoria' ";
 																$ressub=mysql_query($sqlsubcat,$ris);
 																while($valsub=mysql_fetch_assoc($ressub)){
@@ -811,7 +671,11 @@
 															
 			scorricategoriecatalogoneldiv												
 														</div>
-													<?}?></div><?}
+													<?php  
+} 
+?></div>
+<?php
+ }
 													
 													
 													
@@ -826,7 +690,7 @@
 														$i=idutente();
 														$ris=connetti_mysqlpublico();
 														?><div class='ui-corner-all' style='margin-left:10px;margin-bottom:10px;' >
-														<?
+														<?php
 															$sql="SELECT  *   FROM  categorie   where idex_rifutente='$i' ";
 															$res=mysql_query($sql,$ris);
 															$max= mysql_num_rows($res);
@@ -839,31 +703,31 @@
 															?>
 															
 															
-															<div style='background-image:url(<? echo nomeserver()."_nova_img/".$idex_rifutente."/imgcategorie/_s_".$imgcategoria;?>);
+															<div style='background-image:url(<?PHP  echo nomeserver()."_nova_img/".$idex_rifutente."/imgcategorie/_s_".$imgcategoria;?>);
 															cursor:pointer;margin:10px;padding:10px;float:left;background-repeat:no-repeat;
-															width:250px;height:190px;position:relative;' id="anim<?=$id1;?>" class=<?=$colore;?> >
+															width:250px;height:190px;position:relative;' id="anim<?PHP echo $id1;?>" class=<?PHP echo $colore;?> >
 																
 																
-																<?////<img src='".nomeserver()."_nova_img/".$idex_rifutente."/imgcategorie/_s_".$imgcategoria."' width='100px' align='middle'>
+																<?php////<img src='".nomeserver()."_nova_img/".$idex_rifutente."/imgcategorie/_s_".$imgcategoria."' width='100px' align='middle'>
 																?>
-																<div id='fotodesc-<?=$id1;?>' class=<?=$colore;?>
+																<div id='fotodesc-<?PHP echo $id1;?>' class=<?PHP echo $colore;?>
 																style='
 																opacity:0.9;position:absolute;bottom:0px;padding:5px;min-height:40%;width:90%'  >
 																	
 																	<a href='<?php pathsitoutenza().$ID_categoria.'/'. preg_replace("/[^0-9a-zA-Z]/","-",$Categoria)?>/'
-																	style='font-size:16px;color:#fffff;padding:10px;'><?=$Categoria;?></a>
+																	style='font-size:16px;color:#fffff;padding:10px;'><?PHP echo $Categoria;?></a>
 																	
 																	</a>
 																</div>
 																
 																
 																
-																<? echo script($id1);?>
+																<?PHP  echo script($id1);?>
 															</div>
-														<?  }?>
+														<?PHP   }?>
 														
 														
-													</div><?   }
+													</div><?PHP    }
 													
 													
 													
@@ -897,13 +761,13 @@
 																
 																?><ul class='hidden'>
 																<li class='ui-state-hover' style='position:fixed;left:5%;heigth:200px;width:90%;'>
-																	<?
+																	<?PHP 
 																		
 																		while($valsub=mysql_fetch_assoc($ressub)){
 																			
 																			extract($valsub);
 																			?><center><div  >
-																				<img src="<?echo $target.'_s_'.$pathimgcategoria ?>" width='150px' align='middle'>
+																				<img src="<?PHP echo $target.'_s_'.$pathimgcategoria ?>" width='150px' align='middle'>
 																				<?php
 																				
 																				$url_connect=$ID_categoria."/". preg_replace("/[^0-9a-zA-Z]/","-",$Categoria).'/'.$descrizionecategoria;
@@ -942,7 +806,7 @@
 			// $(this).css({'padding-bottom':'0px''});
 		});
 																			</script>
-																			<?
+																			<?PHP 
 																			}
 																		}
 																		
@@ -959,16 +823,16 @@
 																			extract($rs);?>
 																			
 																			
-																			<a href='<?echo pathsitoutenza().$url_connect.'/'.preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?=$id_categoria_1sub;?>/'>
+																			<a href='<?PHP echo pathsitoutenza().$url_connect.'/'.preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?PHP  echo $id_categoria_1sub;?>/'>
 																			
-																			<img src='<?=$target.'_s_'.$urlpathcategoria_1sub; ?>' width='30px'border='0'>
-																			<? echo ucfirst(strtolower($descategtre)) ; ?>	
+																			<img src='<?PHP echo $target.'_s_'.$urlpathcategoria_1sub; ?>' width='30px'border='0'>
+																			<?PHP  echo ucfirst(strtolower($descategtre)) ; ?>	
 																			</a><br>
 																			
 																			
 																			
 																			
-																			<?}
+																			<?PHP }
 																			
 																			
 																		}
@@ -977,7 +841,7 @@
 																		
 																		
 																		function trovatutteleterzecategorie(){
-																			?><center><div style=''><?
+																			?><center><div style=''><?PHP 
 																				$i=idutente();
 																				$ris=connetti_mysqlpublico();
 																				$sql="SELECT * FROM  categorie_1sub , categorie  WHERE  categorie.idex_rifutente = '$i'  
@@ -999,13 +863,13 @@
 																					$id1++;
 																					
 																				?>
-																				<div  id="animat<?=$id1;?>" style='cursor:pointer;margin:10px;padding:10px;float:left;width:200px;height:180px;'  class=<?=$colore;?> >
-																					<? if($maxcount[0]==0){?>
-																						<a href="#"><?}else{?><a href='<?echo pathsitoutenza().preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?=$id_categoria_1sub;?>/'>
-																					<?}?><img src='<?=nomeserver();?>_nova_img/<?=$i;?>/imgcategorie/_s_<?=$urlpathcategoria_1sub;?>' border='0' width='200px'height='170px'>
+																				<div  id="animat<?PHP echo $id1;?>" style='cursor:pointer;margin:10px;padding:10px;float:left;width:200px;height:180px;'  class=<?PHP echo $colore;?> >
+																					<?PHP  if($maxcount[0]==0){?>
+																						<a href="#"><?PHP }else{?><a href='<?php echo pathsitoutenza().preg_replace("/[^0-9a-zA-Z]/","-",$descategtre);?>/<?PHP echo $id_categoria_1sub;?>/'>
+																					<?PHP }?><img src='<?PHP echo nomeserver();?>_nova_img/<?PHP echo $i;?>/imgcategorie/_s_<?PHP echo $urlpathcategoria_1sub;?>' border='0' width='200px'height='170px'>
 																					</a>
 																					
-																					<div  id='foto<?=$id1;?>'class='ui-state-default ui-corner-all' style='border: 3px solid rgb(255, 241, 0);
+																					<div  id='foto<?PHP echo $id1;?>'class='ui-state-default ui-corner-all' style='border: 3px solid rgb(255, 241, 0);
 																					margin: 1px;
 																					overflow: hidden;
 																					top:-25%;
@@ -1013,9 +877,9 @@
 																					width: 190px;
 																					display: block;
 																					
-																					z-index: 2;'><h3><?=$descategtre; ?></h3>
+																					z-index: 2;'><h3><?PHP echo $descategtre; ?></h3>
 																					<span  style='top:0px;'>Articoli
-																					<? print_r($maxcount[0]); ?></span>
+																					<?PHP  print_r($maxcount[0]); ?></span>
 																				</div>
 																				
 																				
@@ -1025,32 +889,32 @@
 																			
 																			
 																			<script>
-																				$("#foto<?=$id1;?>").hide();
-																				$("#animat<?=$id1;?>").animate({'opacity':'0.4'});
-																				$("#animat<?=$id1;?> img").hover(function(){  
-																					//$("#anim<?=$id1;?> b").click(function(){  
-																					$("#animat<?=$id1;?>").css({'border':'4px solid  rgb(255, 241, 0)','margin':'4px','margin-left':'8px'});
-																					$("#animat<?=$id1;?>").stop().animate({'opacity':'1.0'});
-																					//$("#anim<?=$id1;?>").stop().animate({'opacity':'1.0',top:'-10'});
-																					$("#foto<?=$id1;?>").show('slow');
+																				$("#foto<?PHP echo $id1;?>").hide();
+																				$("#animat<?PHP echo $id1;?>").animate({'opacity':'0.4'});
+																				$("#animat<?PHP echo $id1;?> img").hover(function(){  
+																					//$("#anim<?PHP echo $id1;?> b").click(function(){  
+																					$("#animat<?PHP echo $id1;?>").css({'border':'4px solid  rgb(255, 241, 0)','margin':'4px','margin-left':'8px'});
+																					$("#animat<?PHP echo $id1;?>").stop().animate({'opacity':'1.0'});
+																					//$("#anim<?PHP echo $id1;?>").stop().animate({'opacity':'1.0',top:'-10'});
+																					$("#foto<?PHP echo $id1;?>").show('slow');
 																					//    $(this).animate({top:'10'}, 300 );  
 																				});  
-																				//$("#anim<?=$id1?>").mouseleave(function(){  
-																				$("#animat<?=$id1;?>").mouseleave(function(){  
-																					$("#animat<?=$id1;?>").css({'border':'0','margin':'10px'});
+																				//$("#anim<?PHP echo $id1?>").mouseleave(function(){  
+																				$("#animat<?PHP echo $id1;?>").mouseleave(function(){  
+																					$("#animat<?PHP echo $id1;?>").css({'border':'0','margin':'10px'});
 																					
 																					
 																					//  $(this).animate({top: '0'}, 300 );  
-																					//$("#fotodesc-<?=$id1;?>").hide();
+																					//$("#fotodesc-<?PHP echo $id1;?>").hide();
 																					
 																					$(this).stop().animate({'opacity':'0.5',top:'0'},300);
-																					//  $("#fotodesc-<?=$id1;?>").animate({'opacity':'0.0'});
-																					$("#foto<?=$id1;?>").hide('slow');
+																					//  $("#fotodesc-<?PHP echo $id1;?>").animate({'opacity':'0.0'});
+																					$("#foto<?PHP echo $id1;?>").hide('slow');
 																				}); 
-																				</script><?
+																				</script><?PHP 
 																				
 																			}?> </div></center>
-																			<?
+																			<?PHP 
 																				
 																			}
 																			
@@ -1065,7 +929,8 @@
 																			
 																			function scorritagutenza(){
 																				$aray=arrautente();
-																				?><div style='width:400px;margin-top:100px;height:Auto;float:left;' class='ui-state-default ui-corner-all'> <?
+																				?><div style='width:400px;margin-top:100px;height:Auto;float:left;' class='ui-state-default ui-corner-all'> 
+																				    <?PHP 
 																					$r=explode(',',$aray['tagutente']);
 																					shuffle($r);
 																					$i=0;
@@ -1081,12 +946,12 @@
 																							$pad=rand(3,8);
 																						}
 																						
-																						?><div style='float:left;font-size:<?=$font;?>px;padding:<?=$pad;?>px;' <?=$class;?> >
-																						<a href='<?echo pathsitoutenza().utf8_encode($v);?>_'style='text-decoration:none;' ><?echo utf8_encode($v);?></a></div><?
+																						?><div style='float:left;font-size:<?PHP echo $font;?>px;padding:<?PHP echo $pad;?>px;' <?PHP echo $class;?> >
+																						<a href='<?php echo pathsitoutenza().utf8_encode($v);?>_'style='text-decoration:none;' ><?PHP echo utf8_encode($v);?></a></div><?PHP 
 																						if($i > 8){ break;}
 																						$i++;
 																					}
-																				?></div><?
+																				?></div><?PHP 
 																				echo $ptag;
 																			}
 																			
