@@ -1,7 +1,8 @@
 <?php
 	
-	//$newris=conn_public();
-	include_once('conn/conn.php');
+	
+	require ('conn/conn.php');
+	$newris=conn_public();
 	$ris=connetti_mysqlpublico();
 	
 	function querydtagproduct($nome){
@@ -34,7 +35,7 @@
 	?>		<script src="<?=root_shared();?>jquery.autocomplete.js"/></script>
 	<script type="text/javascript" >
 		$(document).ready(function() {
-			$("#namproduct").autocomplete("<?=pathsito();?>clspubbliche/completproduct.php", {
+			$("#namproduct").autocomplete("<?php echo root_shared(); ?>clspubbliche/completproduct.php", {
 				width: 360,
 				matchContains: true,
 				//	mustMatch: true,
@@ -45,7 +46,8 @@
 				selectFirst: false
 			});	})
 	</script>
-	<style>.ac_results {
+	<style>
+	.ac_results {
 		padding: 0px;
 		border: 1px solid black;
 		background-color: white;
@@ -85,7 +87,7 @@
 		}
 		
 		.ac_loading {
-		background: white url('utenza/indicator.gif') right center no-repeat;
+		background: white url('<?php echo root_shared(); ?>img/loader.gif') right center no-repeat;
 		}
 		
 		.ac_odd {
@@ -100,16 +102,30 @@
 		
 		
 	</style>
-	<form method='GET' action='<? echo pathsitoutenza();?>'>
+	<form method='GET' action='<?php echo pathsitoutenza();?>w/' onsubmit="return false;">
 		
-		<input type='text' id='namproduct' name='b' size='15' value='<?php echo $_GET['namproduct'];?>'  placeholder='Trova Articoli' onchange='document.submit();'>
+		<input type='text' onkeyup="vediunpo();" id='namproduct' name='b' size='15' value='<?php echo $_GET['namproduct'];?>'  placeholder='Trova Articoli' >
 	<button type='submit'   >CERCA </button></form>
+
+    <script>
+    
+    function vediunpo () {
+        var b = $("#namproduct");
+    $('#centralemedio').load("<?php echo root_shared(); ?>contr_share.php?b=" + b.val() );
+    
+    
+    
+    }
+    
+    
+    </script>
 	<?php
+
 	}
 	
 	
 	
-	function arrautente($id){
+	function arrautente(){
 		//$id=16;
 		$id=idutente();
 		
@@ -117,7 +133,7 @@
 		$newris = conn_public();
 	
 		$sql="SELECT * FROM utenti,webpubblic 
-		where utenti.IDUtente=$id AND  webpubblic.id_exutente=$id   order by IDUtente";
+		where utenti.IDUtente=$id  AND  webpubblic.id_exutente=$id   order by IDUtente";
 	//	$res=mysql_query($sql,$ris);
 		$res= $newris -> query ($sql);
 	
@@ -131,6 +147,37 @@
 		return $arrayutente;
 		
 	}
+    
+    
+    
+        function querydanome($nome){
+        $ris=connetti_mysqlpublico();
+        //$b=16;
+        $b = idutente();
+        
+        $sql="SELECT * FROM products  where  id_utenteint='$b' and
+        products.pubblico='PUBBLICO ON'
+        and name LIKE '%$nome%'  order by  serial  desc limit 0, 100";
+      
+         $res=mysql_query($sql,$ris);
+        $max= mysql_num_rows($res);
+        if(!$max){echo $sql."--".$b.'<h1>ARTICOLI NON PRESENTI </h1>';}else{
+            
+            
+            
+            filtri($_SESSION['risperpagina'],$tot,$pages,$ordine);
+            ?><h2> Articoli Presenti  <strong><?=$max;?></strong></h2> <?
+            stamparisart($res);
+        }}
+        
+    
+    
+    
+    
+    
+    
+    
+    
 	function script($id1){
 		?>    <script>
 		$("#fotodesc-<?=$id1;?>").hide();
@@ -154,9 +201,15 @@
 			//  $("#fotodesc-<?=$id1;?>").animate({'opacity':'0.0'});
 			$("#fotodesc-<?=$id1;?>").hide('slow');
 		}); 
-		</script> <?
+		</script> <?php
 		
 	}
+    
+    
+    
+    
+    
+    
 	
 	function scorripercategorie($id1,$id2,$id3){
 		$ris=connetti_mysqlpublico();
@@ -195,37 +248,21 @@
 		     ?>
 			<a href="<?=pathsitoutenza().$url_conn.'/'. preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descrizionecategoria']).'/'.$risultati['idsottocateg'];?>"><?=$risultati['descrizionecategoria'];?> > ></a>
 			<a href="<?=pathsitoutenza().$url_conn.'/'.preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descrizionecategoria']).'/'.preg_replace("/[^0-9a-zA-Z]/","-",$risultati['descategtre']).'/'.$risultati['id_categoria_1sub'];?>/"><?=$risultati['descategtre'];?></a>
-		<?}?>
+		<?php 
+         } 
+         ?>
 		
 	</div>
-	<?
+	<?php
 		
 	}
 
 
-	function querydanome($nome){
-		$ris=connetti_mysqlpublico();
-		//$b=16;
-		$b=idutente();
-		
-		$sql="SELECT * FROM products  where  id_utenteint='$b' and
-		products.pubblico='PUBBLICO ON'
-		and name LIKE '%$nome%'  order by  serial  desc limit 0, 100";
-		$res=mysql_query($sql,$ris);
-		$max= mysql_num_rows($res);
-		if(!$max){echo '<h1>ARTICOLI NON PRESENTI </h1>';}else{
-			
-			
-			
-			filtri($_SESSION['risperpagina'],$tot,$pages,$ordine);
-			?><h2> Articoli Presenti  <strong><?=$max;?></strong></h2> <?
-			stamparisart($res);
-		}}
+
 		
 		
 		
-		
-		function metahome($titolo,$desc,$tag,$image){
+		function metahome(){
 			$array=arrautente(); 
 			$url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];
 			
@@ -772,7 +809,7 @@
 															
 															
 															
-															
+			scorricategoriecatalogoneldiv												
 														</div>
 													<?}?></div><?}
 													
@@ -785,7 +822,7 @@
 													
 													
 													
-													function scorricategoriecatalogoneldiv($i){
+													function scorricategoriecatalogoneldiv(){
 														$i=idutente();
 														$ris=connetti_mysqlpublico();
 														?><div class='ui-corner-all' style='margin-left:10px;margin-bottom:10px;' >

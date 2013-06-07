@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+
 $_SESSION['1']['index']='highlight';
 $_SESSION['1']['catalogo']='default';
 $_SESSION['1']['home']='default';
@@ -21,7 +21,6 @@ include 'function/header_share.php';
 </script>	
 <?php 
 
-print_r();
 print_r($_REQUEST);
 //this is menu
 include  'function/menu_share.php';
