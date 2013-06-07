@@ -1,7 +1,7 @@
 <?php
 	
 	//$newris=conn_public();
-	
+	include_once('conn/conn.php');
 	$ris=connetti_mysqlpublico();
 	
 	function querydtagproduct($nome){

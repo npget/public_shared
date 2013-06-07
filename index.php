@@ -9,12 +9,8 @@ $_SESSION['1']['news']='default';
 
 
 
-// QUESTA è una prassi che non si dovrebbe adoperare ma intanto c è 
-// sicuramente è un enoooooooooooooorme errore ma .... 
-// LA CONNECTION
-include 'utenza/clspubbliche/conn/conn.php';
-include 'function/clspubbliche/clsutenza.php';
-include 'function/he.php'; 
+
+include 'function/header_share.php'; 
 
 ?>
 </head>
@@ -28,7 +24,7 @@ include 'function/he.php';
 print_r();
 print_r($_REQUEST);
 //this is menu
-include  'function/menuutenza.php';
+include  'function/menu_share.php';
 
 
 //this is bubble share 
@@ -39,12 +35,12 @@ include  'function/menuutenza.php';
 
 <?php
 //qui  cè il core iniziale  delle chiamate 
-include 'function/centralemedio.php';
+include 'function/central_share.php';
 ?>  
 
 </div>
 
 
 <?php
-include 'function/footerstile.php';
+include 'function/footer_share.php';
 ?>

@@ -13,27 +13,27 @@ RewriteEngine On
 
   
  
-#RewriteRule ^([_A-Za-z0-9-]*)/$                     provaseriashare/index.php?nomeutente=$1&home=home [L]
-#RewriteRule ^([_A-Za-z0-9-]*)$                      provaseriashare/index.php?nomeutente=$1&home=home  [L]
+#RewriteRule ^([_A-Za-z0-9-]*)/$                     public_shared/index.php?nomeutente=$1&home=home [L]
+#RewriteRule ^([_A-Za-z0-9-]*)$                      public_shared/index.php?nomeutente=$1&home=home  [L]
 
 #obsoleto ma attivo 
-RewriteRule ^([_A-Za-z0-9-]*)/home/$                 provaseriashare/index.php?nomeutente=$1&home=home [L]
-RewriteRule ^([_A-Za-z0-9-]*)/home$                  provaseriashare/index.php?nomeutente=$1&home=home   [L]
-RewriteRule ^([_A-Za-z0-9-]*)/HOME/$                 provaseriashare/index.php?nomeutente=$1&home=home [L]
-RewriteRule ^([_A-Za-z0-9-]*)/HOME$                  provaseriashare/index.php?nomeutente=$1&home=home  [L]
+RewriteRule ^([_A-Za-z0-9-]*)/home/$                 public_shared/index.php?nomeutente=$1&home=home [L]
+RewriteRule ^([_A-Za-z0-9-]*)/home$                  public_shared/index.php?nomeutente=$1&home=home   [L]
+RewriteRule ^([_A-Za-z0-9-]*)/HOME/$                 public_shared/index.php?nomeutente=$1&home=home [L]
+RewriteRule ^([_A-Za-z0-9-]*)/HOME$                  public_shared/index.php?nomeutente=$1&home=home  [L]
 
 #contact
-RewriteRule    ^([_A-Za-z0-9-]*)/contact/$           provaseriashare/home.php?nomeutente=$1&contatti=contatti  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/contact$            provaseriashare/home.php?nomeutente=$1&contatti=contatti  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/contact/$           public_shared/home.php?nomeutente=$1&contatti=contatti  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/contact$            public_shared/home.php?nomeutente=$1&contatti=contatti  [L]
 
 
 
 #NEWS  
-RewriteRule    ^([_A-Za-z0-9-]*)/news$               provaseriashare/news.php?nomeutente=$1&messaggi=messaggi  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/news/$              provaseriashare/news.php?nomeutente=$1&messaggi=messaggi  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/news$               public_shared/news.php?nomeutente=$1&messaggi=messaggi  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/news/$              public_shared/news.php?nomeutente=$1&messaggi=messaggi  [L]
 #lettura singolomessaggio
-RewriteRule    ^([_A-Za-z0-9-]*)/news/([A-Za-z0-9-]+).([A-Za-z0-9-]+)\.html$    provaseriashare/news.php?nomeutente=$1&idmessage=$2  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/news/([A-Za-z0-9-]+).([A-Za-z0-9-]+)\.asp$     provaseriashare/news.php?nomeutente=$1&idmessage=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/news/([A-Za-z0-9-]+).([A-Za-z0-9-]+)\.html$    public_shared/news.php?nomeutente=$1&idmessage=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/news/([A-Za-z0-9-]+).([A-Za-z0-9-]+)\.asp$     public_shared/news.php?nomeutente=$1&idmessage=$2  [L]
 
 
 
@@ -41,28 +41,28 @@ RewriteRule    ^([_A-Za-z0-9-]*)/news/([A-Za-z0-9-]+).([A-Za-z0-9-]+)\.asp$     
 #SEZIONE SCROLLA DA CATEGORIE 
 
 #TUTTE LE CATEGORIE dentro la prima 
-RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)$      provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)/$      provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)$      public_shared/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)/$      public_shared/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
 
-#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.html$      provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
-#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.asp$       provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
-#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.odm$       provaseriashare/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.html$      public_shared/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.asp$       public_shared/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
+#RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]+)\.odm$       public_shared/index.php?nomeutente=$1&trovaallcat2=$2&nomecategoria1=$3  [L]
 
 
 #TUTTE le seconde categorie della prima sotto categoria  
-RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)$            provaseriashare/index.php?nomeutente=$1&nomecat2=$4&idcat2=$5  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)/$           provaseriashare/index.php?nomeutente=$1&nomecat2=$4&idcat2=$5  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)$            public_shared/index.php?nomeutente=$1&nomecat2=$4&idcat2=$5  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)/$           public_shared/index.php?nomeutente=$1&nomecat2=$4&idcat2=$5  [L]
 
 
 
 #trovatutte GLI ARTICOLI Della 3 cat ... 
-RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)$            provaseriashare/index.php?nomeutente=$1&viewpeoductsovertree=$6  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)/$           provaseriashare/index.php?nomeutente=$1&viewpeoductsovertree=$6 [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)$            public_shared/index.php?nomeutente=$1&viewpeoductsovertree=$6  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([0-9-]+)/$           public_shared/index.php?nomeutente=$1&viewpeoductsovertree=$6 [L]
 
 
 
-#RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)/$          provaseriashare/product.php?nomeutente=$1&viewpeoductsovertree=$3  [L]
-#RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+).([0-9-]+).shtml$      provaseriashare/product.php?nomeutente=$1&viewpeoductsovertree=$3  [L]
+#RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)/$          public_shared/product.php?nomeutente=$1&viewpeoductsovertree=$3  [L]
+#RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+).([0-9-]+).shtml$      public_shared/product.php?nomeutente=$1&viewpeoductsovertree=$3  [L]
 
 
 
@@ -71,12 +71,12 @@ RewriteRule    ^([_A-Za-z0-9-]*)/([0-9-]+)/([A-Za-z0-9-]*)/([A-Za-z0-9-]*)/([A-Z
 
 #TAG ARTICOLI A CATALOGO 
 #TROVATAG ARTICOLI  al product.php?tag=  passati per tag .. ma o trovo tutto che è meglio  ? 
-RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.shtml$    provaseriashare/index.php?nomeutente=$1&tag=$2  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.html$    provaseriashare/index.php?nomeutente=$1&tag=$2  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.asp$     provaseriashare/index.php?nomeutente=$1&tag=$2  [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.php$     provaseriashare/index.php?nomeutente=$1&tag=$2 [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_/$        provaseriashare/index.php?nomeutente=$1&tag=$2 [L]
-RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_$         provaseriashare/index.php?nomeutente=$1&tag=$2 [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.shtml$      public_shared/index.php?nomeutente=$1&tag=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.html$       public_shared/index.php?nomeutente=$1&tag=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.asp$        public_shared/index.php?nomeutente=$1&tag=$2  [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_.php$        public_shared/index.php?nomeutente=$1&tag=$2 [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_/$           public_shared/index.php?nomeutente=$1&tag=$2 [L]
+RewriteRule    ^([_A-Za-z0-9-]*)/([A-Za-z0-9-]+)_$            public_shared/index.php?nomeutente=$1&tag=$2 [L]
 
 
 
@@ -96,7 +96,7 @@ RewriteRule    ^([A-Za-z0-9-]+)/([0-9-]+)/page/([0-9-]+)/$    product.php?viewpe
 
 #ARTICOLO SINGOLO 
 #trovarticolosingolo     #NOME            #3cat          #serialproduct
-RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)\.html$  provaseriashare/product.php?nomeutente=$1&serial=$4&cat3=$3  [L]
+RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([0-9-]+)\.html$  public_shared/product.php?nomeutente=$1&serial=$4&cat3=$3  [L]
 
 
 

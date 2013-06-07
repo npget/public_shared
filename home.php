@@ -6,9 +6,12 @@ $_SESSION['1']['index']='default';
 $_SESSION['1']['catalogo']='default';
 $_SESSION['1']['home']='highlight';
 $_SESSION['1']['news']='default';
-include 'utenza/clspubbliche/conn/conn.php';
-include 'function/clspubbliche/clsutenza.php';
-include 'function/he.php'; 
+
+
+
+
+
+include 'function/header_share.php'; 
 
 $array=arrautente();
 $mappatura=unserialize($array['mappaziendale']); 
@@ -80,13 +83,13 @@ initialize();
 <?php
  
  
-include  'function/menuutenza.php';
+include  'function/menu_share.php';
 // include  'function/social.php';
 ?>
 
 <div id="centralemedio" class='ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix' >
 <?php 
- include 'function/centralemedio.php';?>  
+ include 'function/central_share.php';?>  
 </div>
 
 
@@ -107,4 +110,4 @@ include  'function/menuutenza.php';
 
 <?php 
 
-include'../0_cls/utenza/footerstile.php';?>
+include'../0_cls/utenza/footer_share.php';?>
