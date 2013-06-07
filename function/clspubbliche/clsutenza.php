@@ -102,9 +102,8 @@
 	</style>
 	<form method='GET' action='<? echo pathsitoutenza();?>'>
 		
-		<input type='text' id='namproduct' name='b' size='30' value='<?php echo $_GET['namproduct'];?>' style='padding:3px;color:black;overflow:hidden-webkit-border-radius: 5px;
-		border-radius: 5px;' placeholder='TROVA NOME E CODICI' onchange='document.submit();'>
-	<input type='submit' value='Trova' class='ui-state-active'> </form>
+		<input type='text' id='namproduct' name='b' size='15' value='<?php echo $_GET['namproduct'];?>'  placeholder='Trova Articoli' onchange='document.submit();'>
+	<button type='submit'   >CERCA </button></form>
 	<?php
 	}
 	
@@ -493,7 +492,7 @@
 														$ris=connetti_mysqlpublico();
 													?>
 													<table class='ui-corner-all' width='90%' >
-														<?
+														<?php
 															
 															while($val=mysql_fetch_array($res)){
 																$id1++;

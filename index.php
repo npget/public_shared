@@ -1,8 +1,6 @@
 <?php
 session_start();
 error_reporting(0);
-
-
 $_SESSION['1']['index']='highlight';
 $_SESSION['1']['catalogo']='default';
 $_SESSION['1']['home']='default';
@@ -21,7 +19,10 @@ include 'function/he.php';
 ?>
 </head>
 <body onload='show_clock();'> 
-	
+<script >
+
+    
+</script>	
 <?php 
 
 print_r();
@@ -35,10 +36,15 @@ include  'function/menuutenza.php';
 ?>
 
 <div id="centralemedio" >
-<?php
-//qui  cè il fulcro delle chiamate 
-include 'function/centralemedio.php';?>  
-</div>
 
 <?php
-include 'function/footerstile.php';?>
+//qui  cè il core iniziale  delle chiamate 
+include 'function/centralemedio.php';
+?>  
+
+</div>
+
+
+<?php
+include 'function/footerstile.php';
+?>

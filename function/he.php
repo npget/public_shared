@@ -4,21 +4,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="robots" content="index, follow">
 <?php
-
+// chiama META TAG
 $array=arrautente(); 
-metahome();?>
+metahome();
+
+?>
 <meta name="google-site-verification" content="oEKMVrXz_dBCx7uCaSu0j4gFUzqBkMJKSlt-Dl59CiI" />	
-<link href="<?=root_shared();?>style.css" rel="stylesheet" type="text/css">
-<link href="<?=pathintapp();?>development-bundle/themes/<?=$array['webstile'];?>/jquery.ui.all.css" rel="stylesheet" type="text/css">
-<link rel="Shortcut Icon" href="<?=nomeserver();?>favicon.ico" type="image/x-icon">
-<script type="text/javascript" src="<?=root_shared();?>ui/jquery-1.8.3.js"></script> 
-<script type="text/javascript" src="<?=root_shared();?>ui/jcorn.js"></script> 
-<script type="text/javascript" src="<?=root_shared();?>ui/jquery-ui-1.9.2.custom.min.js"></script> 
+<link href="<?php echo root_shared();?>style.css" rel="stylesheet" type="text/css">
+<link href="<?php echo pathintapp();?>development-bundle/themes/<?php echo $array['webstile'];?>/jquery.ui.all.css" rel="stylesheet" type="text/css">
+<link rel="Shortcut Icon" href="<?php echo root_shared();?>favicon.ico" type="image/x-icon">
+<script type="text/javascript" src="<?php echo root_shared();?>ui/jquery-1.8.3.js"></script> 
+<script type="text/javascript" src="<?php echo root_shared();?>ui/jcorn.js"></script> 
+<script type="text/javascript" src="<?php echo root_shared();?>ui/jquery-ui-1.9.2.custom.min.js"></script> 
 <script type="text/javascript" >
   var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-XXXXX-X']); _gaq.push(['_trackPageview']);
   (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+  	
   	//selectautoiconcatenate 
 	$(document).ready(function(){
 		var scegli = '<option value="0">Scegli...</option>';

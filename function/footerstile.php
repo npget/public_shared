@@ -15,7 +15,7 @@
 
 if($array['webprivacy']!=""){?>
 <li >
-<div id="dialog"  title="Privacy di _  <?=$array['nomeaziendale'];?>">
+<div id="dialog"  title="Privacy di _  <?php echo $array['nomeaziendale'];?>">
 <?echo nl2br(utf8_encode($array['webprivacy']));?></div>
 <a  id='dialog_link' >
 PRIVACY</a>
@@ -24,7 +24,7 @@ PRIVACY</a>
 
 if($array['webwelcome']!=""){?>
 <li >
-<div id="msgwelcome"  title="Benvenuto - <?=$array['nomeaziendale'];?>">
+<div id="msgwelcome"  title="Benvenuto - <?php echo $array['nomeaziendale'];?>">
 <?echo nl2br(utf8_encode($array['webwelcome']));?></div>
 <a  id='msgwelcome_link' >
 WELCOME</a>
@@ -105,22 +105,22 @@ $_SESSION['nomeopvisitato']=$array['nomeaziendale'];
 <div id="social-icons-wrapper">
 <div id="social-icons" >
 <div id="social-icons-inner">
-<? if($array['socialgoogle']!=""){?>
-<a target="_blank" href="<?=$array['socialgoogle'];?>">
+<?php  if($array['socialgoogle']!=""){?>
+<a target="_blank" href="<?php echo $array['socialgoogle'];?>">
 <img width="25" height="25" 
-src="<?=root_shared();?>img/g-plus-icon-wrapper-25x25.png" ></a><?}?>
-<? if($array['socialtwitter']!=""){?>
-<a target="_blank" href="<?=$array['socialtwitter'];?>">
+src="<?php echo root_shared();?>img/g-plus-icon-wrapper-25x25.png" ></a><?}?>
+<?php if($array['socialtwitter']!=""){?>
+<a target="_blank" href="<?php echo $array['socialtwitter'];?>">
 <img width="25" height="25" 
-src="<?=root_shared();?>img/twitter-wrapper-icon-25x25.gif" ></a><?}?>
-<? if($array['socialfacebook']!=""){?>
-<a target="_blank" href="<?=$array['socialfacebook'];?>">
+src="<?php echo root_shared();?>img/twitter-wrapper-icon-25x25.gif" ></a><?}?>
+<?php if($array['socialfacebook']!=""){?>
+<a target="_blank" href="<?php echo $array['socialfacebook'];?>">
 <img width="25" height="25" 
-src="<?=root_shared();?>img/facebook-icon_25x25.png" ></a><?}?>
-<? if($array['socialskype']!=""){?>
-<a target="_blank" href="<?=$array['socialskype'];?>" title='Connetti con skype'>
+src="<?php echo root_shared();?>img/facebook-icon_25x25.png" ></a><?}?>
+<?php if($array['socialskype']!=""){?>
+<a target="_blank" href="<?php echo $array['socialskype'];?>" title='Connetti con skype'>
 <img width="25" height="25" 
-src="<?=root_shared();?>img/skype_icon_wrapper.jpg" ></a><?}?>
+src="<?php echo root_shared();?>img/skype_icon_wrapper.jpg" ></a><?}?>
 
 
 
@@ -130,11 +130,12 @@ src="<?=root_shared();?>img/skype_icon_wrapper.jpg" ></a><?}?>
 
 <div id='tornaup'  style='bottom: 15px;position: fixed;opacity:0.5;
 right: 5px;padding:4px;z-index:6;' class='ui-state-active ui-corner-all'><a href='#top'  >
-<img src="<?=root_shared();?>img/novaup.png" border='0'>
+<img src="<?php echo root_shared();?>img/novaup.png" border='0'>
 </a></div>
 <script>
 function bottoni()
-{var offset = $("#social-icons").offset();
+{
+    var offset = $("#social-icons").offset();
 var topPadding = 0;
 $(window).scroll(function() {
 if ($(window).scrollTop() > offset.top) {
@@ -175,12 +176,4 @@ $("#social-icons").stop().animate({marginTop: $(window).scrollTop() - offset.top
 
 </script>
 <pre>
-<?
-//print_r($_SERVER);
-
-
-
-?>
-</pre>
-
 </body></html>

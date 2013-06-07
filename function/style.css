@@ -1,10 +1,7 @@
-
-
 body{
 	font-family:Verdana, Geneva;
 	font-size: 1em;
-
-	margin:1px;
+   margin:1px;
 	padding:1px;
 	width:99%;
 }
@@ -24,6 +21,44 @@ h1 {
 	text-shadow: 2px 3px 5px #C2C7C2;
 	margin-bottom:26px;
 }
+
+#namproduct{
+height: 52px;
+float: left;
+width: 430px;
+padding-left: 10px;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+border: 1px solid #d5d5d5;
+-webkit-border-top-left-radius: 3px;
+-webkit-border-bottom-left-radius: 3px;
+-moz-border-radius-topleft: 3px;
+-moz-border-radius-bottomleft: 3px;
+border-top-left-radius: 3px;
+border-bottom-left-radius: 3px;
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+background-color: #fff;
+outline: none;
+font-family: "futura-pt-n7","futura-pt",sans-serif;
+color: #817d78;
+font-size: 2.4em;
+border-collapse: collapse;
+}
+
+
+#login{
+
+    position:relative;
+    float:right;
+    right:0px;
+    width:20%;
+    z-index:3;
+    margin-top:-19px;
+    cursor:pointer
+}
+
 
 #tuttodx{
 margin-top:-5px;
@@ -244,10 +279,14 @@ z-index:9;padding:2px;list-style:none;border-collapse:collapse;
 #menu  ul li   {
 margin-left:4px;
 float: left; position:relative; border-collapse:collapse;list-style:none; border:0px;
-width;90%;
-bottom:-8px;
+width:;
+bottom:-18px;
 }
-#menu ul li form{position:relative;float:left;width:100%}
+
+#menu ul li form{
+    position:relative;
+    float:left;
+     }
 
 #menu  ul  li a{
 cursor:pointer;

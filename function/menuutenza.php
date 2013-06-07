@@ -1,6 +1,6 @@
 
 
-<div id='loginhide' style='position:realtive;width:100%;;padding:5px;display:block;'>wewerewr</div>
+<div id='loginhide'  class='hidden'></div>
 
 
 
@@ -30,29 +30,31 @@
 			-->
 			
 			
-			<li ><a onclick="location.href='<?=pathsitoutenza();?>news/'"
-				class="ui-state-<?echo $_SESSION['1']['news'];?> ui-corner-all"  >
+			<li ><a onclick="location.href='<?php echo pathsitoutenza();?>news/'"
+				class="ui-state-<?php echo $_SESSION['1']['news'];?> ui-corner-all"  >
 			NEWS</a></li>
-			<li><a onclick="location.href='<?=pathsitoutenza();?>contact/'"
-				class="ui-state-<?echo $_SESSION['1']['home'];?> ui-corner-all">
+			<li><a onclick="location.href='<?php echo pathsitoutenza();?>contact/'"
+				class="ui-state-<?php echo $_SESSION['1']['home'];?> ui-corner-all">
 				CONTATTI </a>
 			</li>
 			
 			<li>
-				<? formricerca();?>
+				<?php 
+				echo   formricerca();
+				?>
 			</li>
 			
 		</ul>
 		
 	</div>
 	
-	<div id='login' style='position:relative;float:right;right:0px;width:20%;z-index:3;margin-top:-30px;cursor:pointer' >
-		Login
-		<script language="javascript" src='<?=root_shared();?>liveclock.js'></script>
+	<div id='login'  >
+	    <span class='ui-widget  ui-corner-all' >Login</span>
+		<script language="javascript" src='<?php echo  root_shared();?>liveclock.js'></script>
 	</div>
 	
 		<? 
-			//dentro clutenza
+			//dentro clsutenza
 			scorricategoriecatalogo();
 		?>
 	
